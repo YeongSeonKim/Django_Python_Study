@@ -1,0 +1,10 @@
+<h2>bookmark_index page</h2>
+
+<h4>Bookmark_List</h4>
+<ul>
+  {% for bookmark in bookmark_list %}
+    <li><a href="{% url 'bookmark:detail' bookmark.pk %}">{{ bookmark.title }}</a></li>
+  {% empty %}
+    <li>등록된 북마크가 없습니다.</li>
+  {% endfor %}
+</ul>
