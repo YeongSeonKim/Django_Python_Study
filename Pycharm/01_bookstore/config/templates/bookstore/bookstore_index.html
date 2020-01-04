@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>bookstore_index</title>
+</head>
+<body>
+
+<h2>Bookstore_index_page</h2>
+
+<h4>Book_List</h4>
+<ul>
+  {% for book in book_list %}
+    <li><a href="{% url 'bookstore:detail' book.code %}">{{ book.name }}</a></li>
+    <p>저자 : {{ book.author }}</p>
+  {% empty %}
+    <li>등록된 북마크가 없습니다.</li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>
