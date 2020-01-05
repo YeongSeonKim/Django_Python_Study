@@ -32,7 +32,7 @@ Pycharm 프로젝트를 GitHub에 올리는 방법을 정리해보도록 할것�
 
 ### 1.2 `.gitignore` 파일 생성하기
 
-해당 프로젝트의 최상의 폴더(Pycharm 폴더) 마우스 우클릭을 해준다. 그 다음 아래의 사진과 같이 `New - .ignore file - .gitignore file (Git)`순으로 클릭해준다.
+해당 프로젝트의 최상의 폴더(Pycharm 폴더) 마우스 우클릭을 해준다.  그 다음 아래의 사진과 같이 `New - .ignore file - .gitignore file (Git)`순으로 클릭해준다. **(아래의 사진들을 위치가 잘못되었다. 그래도 하는 방법은 똑같다. 파일의 위치는 `README.md `파일과 동일한 폴더에 생성하면된다!!)** 
 
 ![image-20200105163826464](images/image-20200105163826464.png)
 
