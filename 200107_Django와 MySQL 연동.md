@@ -158,7 +158,23 @@ Next를 눌러준다.
 
 ![image-20200108000936850](images/image-20200108000936850.png)
 
+Workbench에서 설치성공 확인하는법
 
+![image-20200108010006280](images/image-20200108010006280.png)
+
+윈도우에서 MySQL Workbench 8.0 CE 를 클릭한다. 그러면 아래와 같은 창이 뜰 것이다.
+
+![image-20200108010106841](images/image-20200108010106841.png)
+
+MySQL Connections 에있는 Local instance MySQL57을 클릭해준다. 그러면 비밀번호를 입력할 수 있는 창이 뜰것이다. 비밀번호를 입력하고 ok 버튼을 클릭해준다.
+
+![image-20200108010317446](images/image-20200108010317446.png)
+
+아래의 화면이 뜨게 되면 설치,연결 성공이다.!!
+
+![image-20200108010353174](images/image-20200108010353174.png)
+
+또 다른 확인 방법 
 
 윈도우에서 MySQL 5.7 Command Line Client 프로그램이 있을거다. 실행을 시켜준다. 설치할 때 지정했던 Root 계정 비밀번호를 입력 후 접속한다.
 
