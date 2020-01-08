@@ -234,6 +234,10 @@ cmd 창에서 mysql 버전을 확인해보도록하자. mysql -V 입력
 
 버전이 잘뜨면 성공!! 설치 끝!!
 
+
+
+#### 2020-01-09
+
 ## 3. Django와 MySQL 연동
 
 [참고사이트](http://pythonstudy.xyz/python/article/201-Python-DB-API)
@@ -243,4 +247,6 @@ cmd 창에서 mysql 버전을 확인해보도록하자. mysql -V 입력
 또한 MySQL이 기본적으로 제공하는 Workbench라는 툴을 이용하면 데이터베이스를 더 쉽게 사용하고 관리할 수 있어 굉장히 편리하다.
 
 MySQL과 Workbench는 위에서 설치하였다.
+
+
 
