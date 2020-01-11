@@ -248,5 +248,79 @@ cmd 창에서 mysql 버전을 확인해보도록하자. mysql -V 입력
 
 MySQL과 Workbench는 위에서 설치하였다.
 
+### 3.1 mysqlclient 설치
+
+Python에서 MySQL을 사용하기 위해 우선 Python DB API 표준을 따르는 MySQL DB 모듈을 설치해야 한다.
+
+MySQL을 지원하는 Python 모듈은 여러 가지가 있는데, 여기서는 `mysqlclient` 라는 모듈을 사용할 것이다.
+
+일단 `VSCode`에서`01_bookstore`프로젝트에서 실행할것이다.
+
+```bash
+$ pip install mysqlclient
+```
+
+![image-20200110005759009](images/image-20200110005759009.png)
+
+### 3.2 settings.py 코드 수정
+
+현재 settings.py의 데이터베이스 부분에는 아래의 코드처럼 default 데이터베이스인 SQLite3로 지정되어 있다.
+
+```python
+# Database
+# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+
+이 부분에 우리가 사용할 MySQL에 대한 정보를 입력해주어야 한다. 입력할 항목은 아래와 같다.
+
+```python
+# MySQL
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bookstore',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+```
+
+- `ENGINE: 'django.db.backends.mysql' `: MySQL 엔진 설정
+- `'NAME'` : 연결할 데이터베이스(스키마) 이름
+- `'USER'` : 사용할 데이터베이스 계정
+  - root는 MySQL의 최상위 계정으로 MySQL을 설치할 때 함께 만들었다.
+- `'PASSWORD'`: 사용할 계정에 대한 패스워드
+- `'HOST'` : 데이터베이스 주소(IP)
+  - 우리는 PC에 설치된 MySQL을 사용하는 것이므로 localhost로 지정
+- `'PORT'` : 데이터베이스 포트 번호
+  - MySQL은 3306이 default
+
+### 3.3 MySQL 스키마 생성
+
+MySQL에서는 데이터베이스를 스키마라고도 합니다. 아까 settings.py에서 연결할 데이터베이스의 이름을 `bookstore`라고 지정했지만 아직 MySQL에는 `bookstore`라는 데이터베이스가 존재하지 않는다. 따라서 이를 만들어줘야 한다.
+
+먼저 workbench에서 local instance를 선택하여 들어간다.
+
+![image-20200108010106841](images/image-20200108010106841-1578642369946.png)
+
+로그인하면 다음과 같은 화면이 나온다. SQL 쿼리문을 입력하여 직접 스키마를 생성할 수도 있지만 그냥 스키마 리스트가 나열된 곳에 마우스 우클릭을 하면 스키마를 쉽게 생성할 수 있다.
+
+![image-20200110164936066](images/image-20200110164936066.png)
+
+스키마 이름은 settings.py에서 지정한 이름으로, 나머지 항목은 다음과 같이 지정한 후 아래에 있는`apply` 버튼을 눌러 스키마를 생성한다.
+
+![image-20200110165350625](images/image-20200110165350625.png)
+
+그러면 왼쪽에 `bookstore` 스키마가 생긴 것을 확인할 수 있다.
+
 
 
