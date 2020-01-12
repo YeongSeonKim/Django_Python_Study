@@ -322,5 +322,83 @@ MySQL에서는 데이터베이스를 스키마라고도 합니다. 아까 settin
 
 그러면 왼쪽에 `bookstore` 스키마가 생긴 것을 확인할 수 있다.
 
+### 3.4 데이터베이스 변경사항 반영
+
+현재 bookstore 데이터베이스는 초기화 상태이다. 지금까지 작업한 내용을 반영하기 위해 아래의 명령어로 데이터베이스에 변경사항을 반영한다.
+
+```bash
+$ python manage.py migrate
+```
+
+migrate가 성공하고 workbench에서 bookstore 데이터베이스를 확인해보면 아래의 화면과 같이 Django가 기본적으로 만들어주는 테이블 외에도 models.py에 정의한 book 테이블까지 생성된 것을 확인할 수 있다.
+
+![image-20200112160429756](images/image-20200112160429756.png)
+
+### 3.5 Admin 계정 생성 및 데이터 입력
+
+migrate를 다시 한 것과 마찬가지로 settings.py에서 데이터베이스 부분을 새로 설정하여 초기화된 상태이기 때문에 Admin 계정 또한 다시 생성해야 한다.
+
+```bash
+$ python manage.py createsuperuser
+```
+
+생성한 Admin 계정으로 로그인하여 Admin 페이지를 들어가보면
+
+![image-20200104225849967](images/image-20200104225849967-1578814223678.png)
+
+Book 테이블에 아무런 데이터가 없는 것을 확인할 수 있다.
+
+이전에 했던 것처럼 Book 테이블에 데이터를 추가하면 아래 Admin 페이지에서 보이는 것처럼
+
+![image-20200104230255155](images/image-20200104230255155-1578814256698.png)
+
+ workbench의 book 테이블에도 데이터가 INSERT 된 것을 확인할 수 있다.
+
+![image-20200112163146383](images/image-20200112163146383.png)
 
 
+
+## 4. Git 올릴때 문제 해결하기
+
+- MySql 연동 관련 모듈설치
+
+```bash
+#가상환경 내에서 설치
+$ pip install mysql-connector
+$ pip install django-mysql
+$ pip install mysqlclient
+$ pip install python-decouple
+```
+
+하지만 이대로 프로젝트를 GitHub에 올리게 되면 `settings.py`에 직접 지정한 MySQL에 대한 정보가 다 올라가게 된다. 보안상의 문제가 생길수 있으니 별도의 파일에서 설정들을 불러와 입력할 수 있게 수정할 것이다. 
+
+별도의 파일에서 설정정보를 불러오는 방법을 사용해 볼 것이다. `cnf`라는 확장자를 가진 파일을 만들어 그안에 아래 와 같이 입력해준다.
+
+`mysql.cnf`
+
+```cnf
+[client]
+database = DB명
+host = 데이테베이스 주소(IP)
+port = 데이터베이스 port설정
+user = 데이터베이스 계정 id
+password = mysql 계정 비밀번호
+```
+
+그 다음, 위의 파일을 settings.py에서 아래와 같이 불러와 적용시켜준다.
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'bookstore', # mysql db계정
+        'OPTIONS': {
+            'read_default_file': os.path.join(BASE_DIR, 'mysql.cnf'),
+        }
+    }
+}
+```
+
+
+
+ 
