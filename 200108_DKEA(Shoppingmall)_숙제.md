@@ -183,7 +183,31 @@ $ python manage.py inspectdb
 
 ### 2.7 URL 연결
 
+#### 2.7.1 config/urls.py
 
+`config/urls.py`에서는 `http://127.0.0.1:8000/`로 들어가면 바로 main_page가 뜨게 할꺼고 `DKEA/urls.py`와 연결해 주도록 할꺼다.
+
+```python
+# config/urls.py
+
+from django.contrib import admin
+from django.urls import path, re_path, include
+from DKEA import views as DKEA_views
+
+urlpatterns = [
+    re_path(r'^admin/', admin.site.urls),
+    re_path(r'^$', DKEA_views.DKEA_main, name='main'),
+    re_path(r'^DKEA/', include('DKEA.urls')),
+]
+```
+
+#### DKEA/urls.py
+
+```python
+# DKEA/urls.py
+
+
+```
 
 ### 2.8 View
 
