@@ -37,16 +37,24 @@ def DKEA_category_list(request, c_code):
     try:
         cursor = connection.cursor()
 
+        # c_name만 가져오는 sql
+        c_nameSql  = "SELECT DISTINCT(c_name) FROM dkea_category where c_code = (%s)"
+
         strSql = "SELECT p.p_id, p.p_name, p.img_src, p.price, c.c_code, c.c_name"
         strSql += " FROM dkea_product as p"
         strSql += " LEFT JOIN dkea_category as c ON p.c_id = c.c_id"
         strSql += " WHERE c.c_code = (%s)"
+
+        c_result = cursor.execute(c_nameSql,(c_code,))
+        c_name = cursor.fetchall()
 
         result = cursor.execute(strSql,(c_code,))
         products = cursor.fetchall()
             
         connection.commit()
         connection.close()
+
+        c_name_data = c_name[0][0]
 
         data = []
         for product in products:
@@ -64,7 +72,7 @@ def DKEA_category_list(request, c_code):
         connection.rollback()
         print("Failed selecting in DKEA_category_list")
 
-    return render(request, 'DKEA/DKEA_category_list.html', {'products':data})
+    return render(request, 'DKEA/DKEA_category_list.html', {'products':data, 'c_name_data':c_name_data})
 
 
 def DKEA_product_detail(request, p_id):

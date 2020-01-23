@@ -86,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dkea',
-        'USER': '유저계정',
-        'PASSWORD': '비밀번호',
+        'USER': 'root',
+        'PASSWORD': 'ys0311',
         'HOST': 'localhost',
         'PORT': '3306',
     }
