@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br>
+<h2>Main page</h2>
+<br>
+{% for category in categories %}
+  <button type="button" class="btn btn-primary" onclick='location.href="{% url 'DKEA:category_list' category.c_code %}"'>{{ category.c_name }}</button>
+{% endfor %}
+{% endblock body %}
