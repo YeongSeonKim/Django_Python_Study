@@ -38,7 +38,9 @@ def DKEA_category_list(request, c_code):
         cursor = connection.cursor()
 
         strSql = "SELECT p.p_id, p.p_name, p.img_src, p.price, c.c_code, c.c_name"
-        strSql =+ " FROM dkea_product as p LEFT JOIN dkea_category as c ON p.c_id = c.c_id WHERE c.c_code = (%s)"
+        strSql += " FROM dkea_product as p"
+        strSql += " LEFT JOIN dkea_category as c ON p.c_id = c.c_id"
+        strSql += " WHERE c.c_code = (%s)"
 
         result = cursor.execute(strSql,(c_code,))
         products = cursor.fetchall()
