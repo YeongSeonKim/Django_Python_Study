@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h2>DKEA_product_detail</h2>
-<h2>{{ product_info.c_name }}</h2>
-<h2>{{ product_info.i_name }}</h2>
+<h2>DKEA_product_detail > {{ product_info.c_name }} > {{ product_info.i_name }}</h2>
 <ul>
-  <h4>{{ product_info.p_name }}</h4>
-  <h4>{{ product_info.price }}</h4>
-  <li>구매링크 : <a href = "{{ product_info.link }}"></a>{{ product_info.link }}</li>
+  <img src="{{ product_info.img_src }}" class="rounded card-img-top" style="width: 15rem; height: 18rem;">
+  <h4>상품명 : {{ product_info.p_name }}</h4>
+  <h4>상품가격 : {{ product_info.price }}</h4>
+  <p>구매링크 : <a href = "{{ product_info.link }}">{{ product_info.link }}</a></p>
 </ul>
 {% endblock body %}

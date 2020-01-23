@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h2>DKEA_category_list</h2>
-<h2>{{ c_name_data }}</h2>
+<h2>DKEA_category_list > {{ c_name_data }}</h2>
 <div class="row justify-content-center align-items-center">
-
 {% for product in products %}
   <div class="card mr-4 mb-4 p-2" style="width: 18rem;">
   <img src="{{ product.img_src }}" class="rounded card-img-top" style="width: 15rem; height: 18rem;">

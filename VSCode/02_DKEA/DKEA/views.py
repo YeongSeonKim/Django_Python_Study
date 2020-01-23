@@ -92,7 +92,7 @@ def DetailView(request, p_id):
     try:
         cursor = connection.cursor()
 
-        strSql = "SELECT p.p_id, p.p_name, p.price, p.link, c.c_code, c.c_name, c.i_name"
+        strSql = "SELECT p.p_id, p.p_name, p.img_src, p.price, p.link, c.c_code, c.c_name, c.i_name"
         strSql += " FROM dkea_product as p"
         strSql += " LEFT JOIN dkea_category as c ON p.c_id = c.c_id"
         strSql += " WHERE p.p_id = (%s)"
@@ -105,11 +105,12 @@ def DetailView(request, p_id):
         product_info = {
             'p_id': datas[0][0],
             'p_name': datas[0][1],
-            'price': datas[0][2],
-            'link': datas[0][3],
-            'c_code': datas[0][4],
-            'c_name': datas[0][5],
-            'i_name': datas[0][6],
+            'img_src': datas[0][2],
+            'price': datas[0][3],
+            'link': datas[0][4],
+            'c_code': datas[0][5],
+            'c_name': datas[0][6],
+            'i_name': datas[0][7],
         }
 
     except:
