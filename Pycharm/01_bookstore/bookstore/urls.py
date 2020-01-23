@@ -6,6 +6,6 @@ app_name = 'bookstore'
 urlpatterns = [
     # path('', views.Bookstore_index, name='index'),
     re_path(r'^$', views.Bookstore_index, name='index'),
-    path('<str:bookstore_code>/', views.Bookstore_detail, name='detail'),
-    # re_path(r'^', views.Bookstore_detail, name='detail'),
+    # path('<str:bookstore_code>/', views.Bookstore_detail, name='detail'),
+    re_path(r'^(?P<bookstore_code>b\d+)/$', views.Bookstore_detail, name='detail'),
 ]
