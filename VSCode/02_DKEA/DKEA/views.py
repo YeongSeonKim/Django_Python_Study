@@ -3,18 +3,19 @@ from django.shortcuts import render, get_object_or_404
 from django.db import connection
 
 # Create your views here.
-def DKEA_main(request):
+def MainView(request):
 
     try:
         cursor = connection.cursor()
 
-        strSql = "SELECT DISTINCT(c.c_name), c.c_code FROM dkea_category as c"
+        strSql = "SELECT c_name, c_code FROM dkea_category GROUP BY c_name DESC"
+        # strSql = "SELECT DISTINCT(c.c_name), c.c_code FROM dkea_category as c"
 
         result = cursor.execute(strSql)
         categories = cursor.fetchall()
         
         connection.commit()
-        connection.close()
+        # connection.close()
 
         data = []
         for category in categories:
@@ -27,12 +28,16 @@ def DKEA_main(request):
 
     except:
         connection.rollback() 
+        # connection.close()
         print("Failed selecting in DKEA_main") 
+
+    finally:
+        connection.close()
 
     return render(request, 'DKEA/DKEA_main.html', {'categories':data})
 
 
-def DKEA_category_list(request, c_code):
+def CategoryView(request, c_code):
 
     try:
         cursor = connection.cursor()
@@ -52,7 +57,6 @@ def DKEA_category_list(request, c_code):
         products = cursor.fetchall()
             
         connection.commit()
-        connection.close()
 
         c_name_data = c_name[0][0]
 
@@ -70,22 +74,25 @@ def DKEA_category_list(request, c_code):
 
         content = {
             'products':data,
-            'c_name_data':c_name_data
+            'c_name_data':c_name_data,
             }
 
     except:
         connection.rollback()
         print("Failed selecting in DKEA_category_list")
 
+    finally:
+        connection.close()    
+
     return render(request, 'DKEA/DKEA_category_list.html', content)
 
 
-def DKEA_product_detail(request, p_id):
+def DetailView(request, p_id):
 
     try:
         cursor = connection.cursor()
 
-        strSql = "SELECT p.p_id, p.p_name, p.price, p.link, p. c.c_code, c.c_name, c.i_name"
+        strSql = "SELECT p.p_id, p.p_name, p.price, p.link, c.c_code, c.c_name, c.i_name"
         strSql += " FROM dkea_product as p"
         strSql += " LEFT JOIN dkea_category as c ON p.c_id = c.c_id"
         strSql += " WHERE p.p_id = (%s)"
@@ -109,5 +116,8 @@ def DKEA_product_detail(request, p_id):
         connection.rollback()
         print("Failed selecting in DKEA_product_detail")
         # product_info = {}
+    
+    finally:
+        connection.close()
 
     return render(request, 'DKEA/DKEA_product_detail.html', {'product_info':product_info})

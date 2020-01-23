@@ -19,6 +19,6 @@ from DKEA import views as DKEA_views
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
-    re_path(r'^$', DKEA_views.DKEA_main, name='dkea_main'),
+    re_path(r'^$', DKEA_views.MainView, name='dkea_main'),
     re_path(r'^DKEA/', include('DKEA.urls')),
 ]
