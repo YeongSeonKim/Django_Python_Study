@@ -68,11 +68,16 @@ def DKEA_category_list(request, c_code):
             }
             data.append(row)
 
+        content = {
+            'products':data,
+            'c_name_data':c_name_data
+            }
+
     except:
         connection.rollback()
         print("Failed selecting in DKEA_category_list")
 
-    return render(request, 'DKEA/DKEA_category_list.html', {'products':data, 'c_name_data':c_name_data})
+    return render(request, 'DKEA/DKEA_category_list.html', content)
 
 
 def DKEA_product_detail(request, p_id):
