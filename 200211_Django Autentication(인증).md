@@ -4,7 +4,11 @@
 
 참고사이트 : [Django 공식사이트](https://docs.djangoproject.com/en/2.2/ref/contrib/auth/)
 
-## User model
+## Django Autentication(인증)
+
+웹 사이트에서 현재 접속한 사용자가 로그인이 되어있는지 로그인이 되어있다면 어떤 사용자이고 어떤 권한을 가지고 있는지그에 따라 사용할 수 있는 기능이나 페이지에 제한을 두고 있다. 이와 같은 로직을 구현하기 위해서는 먼저 사용자를 인증하는 과정을 거쳐줘야 한다. Django에서는 사용자 인증 및 권한 승인 시스템을 다양한 기능들과 함께 제공해준다.
+
+## User 
 
 ### Fields(필드)
 
@@ -25,28 +29,16 @@ User 객체에는 아래와 같은 다양한 필드들이 있다.
 
 ### Attributes(속성) 
 
-html에서 사용.
+view, templates에서 인증 확인가능
 
-- **is_authenticated** : 로그인여부, 사용자가 인증되었는지 알수 있는 방법이다.  읽기 전용 항상 속성 True
+- **is_authenticated** : 로그인여부, 사용자가 인증되었는지 알수 있는 방법이다.  읽기 전용 항상 속성 True 
 - **is_anonymous** : 로그아웃 여부, 항상 읽기 전용 속성 False
 
-### Methods(방법)
-
-
-
------
-
-`from django.contrib.auth.models import User` User를 import해준다.
-
-`from django.contrib.auth import authenticate, login, logout`  
-
-`from django.contrib.auth`앱의 `authenticate, login, logout`를 import 해준다.
-
-## 회원가입
+## 1. User 생성 - 회원가입
 
 회원가입은 User 모델의 `create_user()`함수를 이용하면 된다.
 
-create_user(username=user_id, email=email, password=user_pw, first_name=name )
+`create_user(username, email=None, password=None, **extra_fields)`
 
 ()안에 다른 필드들 써줄수 있음
 
@@ -55,15 +47,43 @@ from django.contrib.auth.models import User
 
 def RegisterAccountsView(request):
     ...
-
+	# 방법1
+    	user = User.objects.create_user('test', 'test@test.com', 'password')
+    # 방법2
 		user = User.objects.create_user(username=user_id, password=user_pw, email=email, first_name=name)
 ```
 
-## 인증
+- superuser
 
-authenticate
+앱을 생성하고 admin 페이지를 관리하기 위해 `python manage.py createsuperuser` 명령문을 날리는데 이렇게 슈퍼유저를 생성한 것처럼 함수를 사용하여 슈퍼유저를 생성할 수 있다.
 
-인증은 간단하다!! 
+`create_superuser(username, email, password, **extra_fields)`
+
+```python
+from django.contrib.auth.models import User
+
+def createSuperUser(request):
+    superUser = create_superuser('test', 'test@test.com', 'password')
+```
+
+## 2. User 정보수정
+
+```python
+from django.contrib.auth.models import User
+user = User.objects.get(username='test')
+user.email='test@test.com'
+# 비밀번호 변경
+user.set_password('new password')     
+
+# 수정 후 save()를 해줘야 영구적으로 반영된다.
+user.save()        
+```
+
+## 3. User 인증
+
+`authenticate(request=None, **credentials)`
+
+User 인증 함수이다. 인증은 간단하다!! 
 
 ```python
 from django.contrib.auth import authenticate
@@ -81,9 +101,9 @@ def LoginView(request):
 
 Django 에서는 **username**을 ID로 취급한다.
 
-## 로그인
+## 4. 로그인
 
-login
+`login(request, user, backend=None)`
 
 로그인은 인증 후 login() 함수를 사용하면 된다.
 
@@ -96,16 +116,16 @@ def LoginView(request):
 		user = authenticate(username=user_id, password=user_pw)
         
         if user is not None:
-    		login(request, user=user)
+    		login(request, user)
             # 성공 : 리다이렉트
 			
     	else:
   	      	# 실패 : 에러메시지 전송
 ```
 
-## 로그아웃
+## 5. 로그아웃
 
-logout
+`logout(request)` : 현재 request에 대한 세션 데이터를 모두 삭제해준다.
 
 ```python
 from django.contrib.auth import logout
@@ -115,8 +135,6 @@ def LogoutView(request):
 	logout(request)
     # Redirect 할 페이지 return.
 ```
-
-
 
 
 
