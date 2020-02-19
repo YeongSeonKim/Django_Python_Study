@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/my_post_list.css' %}">
+  <!-- Fontawesome 적용 -->
+  <script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block title %}
+나의 포스팅 페이지 | Instagram
+{% endblock title %}
+
+{% block _nav %}
+  {% include 'instagram/_nav.html' %}
+{% endblock _nav %}
+
+{% block body %}
+
+{% if messages %}
+  <div>
+    {% for message in messages %}
+      {{ message.tags }}! {{ message.message }}
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div class="main">
+  <div class="user_info">
+    <img src="{% static 'images/test.jpg' %}" alt="test" class="user_img">
+    <div class="user_id">user_id</div>
+    <button type="submit" class="btn btn-primary">로그아웃</button>
+  </div>  
+</div>  
+
+<div class="main">
+<div class="user_posts">
+    <section class="card_section">
+      <div class="card">
+        <div class="postBox">
+          <div class="postImg">
+            <img src="{% static 'images/test.jpg' %}" alt="상품 이미지" class="innerImg">
+          </div>
+        </div>
+      </div>
+    </section>
+</div>
+</div>
+{% endblock body %}
