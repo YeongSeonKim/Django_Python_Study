@@ -148,4 +148,4 @@ MEDIA_URL = '/media/' # 업로드 할 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 인증확인 실패 시 리다이렉트할 경로 설정
-LOGIN_URL = 'accounts/login/'
+LOGIN_URL = '/accounts/login/'
