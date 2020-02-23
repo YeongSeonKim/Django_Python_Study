@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'instagram',
+        'NAME': 'instagram_2nd',
         'USER': 'root',
         'PASSWORD': config('PASSWORD'),
         'HOST': 'localhost',
@@ -149,3 +149,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 인증확인 실패 시 리다이렉트할 경로 설정
 LOGIN_URL = '/accounts/login/'
+
+# User 모델 확장하기
+AUTH_USER_MODEL = 'accounts.User'

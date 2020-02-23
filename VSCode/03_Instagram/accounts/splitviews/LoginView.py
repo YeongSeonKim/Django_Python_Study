@@ -9,21 +9,11 @@ def LoginView(request):
         user_id = request.POST.get('user_id')
         user_pw = request.POST.get('user_pw')
 
-        try:
-          user = authenticate(request, username=user_id, password=user_pw)
+        user = authenticate(request, username=user_id, password=user_pw)
 
-          login(request, user)
-          return redirect('instagram:main')  
-
-        except ObjectDoesNotExist:
+        if user is not None:
+            login(request, user=user)
+            return redirect('instagram:main')
+        else:
             messages.error(request,'아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해주세요.')
             return redirect('accounts:login')
-
-        # user = authenticate(request, username=user_id, password=user_pw)
-
-        # if user is None:
-        #     login(request, user)
-        #     return redirect('instagram:main')
-        # else:
-        #     messages.error(request,'아이디 또는 비밀번호가 일치하지 않습니다. 다시 입력해주세요.')
-        #     return redirect('accounts:login')

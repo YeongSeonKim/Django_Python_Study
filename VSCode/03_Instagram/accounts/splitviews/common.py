@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.db import connection
 from django.contrib import messages
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from accounts.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth import authenticate,login, logout
+from django.contrib.auth import authenticate, login, logout
 import string
 import random
 import hashlib

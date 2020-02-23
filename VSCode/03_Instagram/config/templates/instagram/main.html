@@ -35,12 +35,14 @@
   <div class="main_right">
     <div id="fixed_nav">
       <div class="card" id="card_right">
-        <header>
-          <img src="{% static 'images/test.jpg' %}" alt="test">
-          <div class="user_name">
-            <a href="{% url 'instagram:my_post_list' user_id %}">{{ user_id }}</a>
-          </div>
-        </header>
+        <div>
+          <span class="user_img">
+            <img src="{% static 'images/test.jpg' %}" alt="test">
+          </span>
+          <span class="user_name">
+            <a href="{% url 'instagram:post_list' user_id %}">{{ user_id }}</a>
+          </span>
+        </div>
       </div>
     </div>
   </div>

@@ -18,6 +18,9 @@
     margin: 30px;
     display: block;
 }
+.user_id p{
+    color: black;
+}
 /* .user_posts{
     background-color: white;
     width: 500px;
