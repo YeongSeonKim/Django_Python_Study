@@ -17,8 +17,9 @@
 {% block body %}
 <div class="main">
 <div class="container">
-<h4 class="card-header">{{ user.username }} 님의 정보수정</h4>
+<div class="row justify-content-center align-items-center">
 <div class="card">
+<h4 class="card-header">{{ user.username }} 님의 정보수정</h4>
 <div class="row justify-content-center align-items-center">
 <div class="card-body">
 <div class="text-center">
@@ -54,6 +55,7 @@
       {% endfor %}
   </div>
 {% endif %}
+</div>
 </div>
 </div>
 </div>

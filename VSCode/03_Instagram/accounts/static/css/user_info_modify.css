@@ -1,7 +1,13 @@
+.main{
+    background-color: white;
+}
+.container{
+    margin-top: 50px;
+}
 .card{
     border: 1px solid #c7c7c7;
     background-color: #fafafa;
-    width:auto;
+    width:500px;
     height: auto;
 }
 .user_img{
