@@ -17,13 +17,12 @@
 {% block body %}
 <div class="main">
 <div class="container">
-<div class="row justify-content-center align-items-center">
-<div style="margin-top:50px;">
+<h4 class="card-header">{{ user.username }} 님의 정보수정</h4>
 <div class="card">
-  <h4 class="card-header">{{ user.username }} 님의 회원정보수정</h4>
+<div class="row justify-content-center align-items-center">
 <div class="card-body">
 <div class="text-center">
-  <img class="" src="{% static 'images/signup.png'%}">
+  <img class="user_img" src="{% static 'images/signup.png'%}">
 </div>
 <form class="mt-3" action="{% url 'accounts:userinfomodify' %}" method="POST" enctype="multipart/form-data">
   {% csrf_token %}
@@ -56,7 +55,6 @@
       {% endfor %}
   </div>
 {% endif %}
-</div>
 </div>
 </div>
 </div>
