@@ -31,6 +31,7 @@
       {{ user_id }}
     </div>
     {% if user.is_authenticated %}
+    <button type="submit" class="btn btn-primary" id="modify_btn"onclick='location.href="{% url 'accounts:userinfomodify' %}"'>회원정보수정</button>
     <button type="submit" class="btn btn-primary" onclick='location.href="{% url 'accounts:logout' %}"'>로그아웃</button>
     {% endif %}
   </div>  
