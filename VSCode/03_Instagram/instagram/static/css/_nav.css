@@ -33,3 +33,9 @@ a:hover{
     color: black;
     text-decoration: none; 
 } 
+.navUserImg{
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    margin: 1rem;
+}

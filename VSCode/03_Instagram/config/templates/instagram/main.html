@@ -24,40 +24,18 @@
   </div>
 {% endif %}
 
-<!--user_id section 보이게끔 임시 생성-->
-<div class="main">
-  <div class="main_left">
-    <section class="card_section">
-      <div class="card">
-      </div>
-    </section>
-  </div>
-  <div class="main_right">
-    <div id="fixed_nav">
-      <div class="card" id="card_right">
-        <div>
-          <span class="user_img">
-            <img src="{% static 'images/test.jpg' %}" alt="test">
-          </span>
-          <span class="user_name">
-            <a href="{% url 'instagram:post_list' user_id %}">{{ user_id }}</a>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="main">
     <div class="main_left">
+      {% comment %} {% for post in posts %} {% endcomment %}
       <section class="card_section">
         <div class="card">
           <header>
             <img src="{% static 'images/test.jpg' %}" alt="test">
-            <div class="user_id">user_id</div>
+            <div class="user_id"><a href="{% url 'instagram:post_list' user_id %}">{{ post.user_id }}</a></div>
           </header>
           <div class="card_image">
             <img src="{% static 'images/test.jpg' %}" alt="test">
+            <p>{{ post.content }}</p>
           </div>
           <div class="info">
             <div class="info_left">
@@ -80,6 +58,22 @@
         </div>
       </div>
     </section>
+    {% comment %} {% endfor %} {% endcomment %}
+  </div>
+  
+  <div class="main_right">
+    <div id="fixed_nav">
+      <div class="card" id="card_right">
+        <div>
+          <span class="user_img">
+            <img src="{% static 'images/test.jpg' %}" alt="test">
+          </span>
+          <span class="user_name">
+            <a href="{% url 'instagram:post_list' user_id %}">{{ user_id }}</a>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock body %}

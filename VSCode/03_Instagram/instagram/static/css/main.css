@@ -68,7 +68,7 @@ header img{
 }
 .main_left{
     margin: 1rem;
-    overflow: auto;
+    /* overflow: auto; */
 }
 .main_right{
     margin-top: 1rem;

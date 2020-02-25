@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
+    <!-- Fontawesome 적용 -->
+    <script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
+{% endblock head %}
+
+{% block title %}
+포스트 상세페이지 | Instagram
+{% endblock title %}
+
+{% block _nav %}
+    {% include '_nav.html' %}
+{% endblock _nav %}
+
+
+{% block body %}
+
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            {{ message.tags }}! {{ message.message }}
+        {% endfor %}
+    </div>
+{% endif %}
+<h3>post_detail_페이지 : 하나의 게시글에대한 디테일 페이지, 게시글삭제할수있게끔 삭제버튼</h3>
+
+{% endblock body %}
