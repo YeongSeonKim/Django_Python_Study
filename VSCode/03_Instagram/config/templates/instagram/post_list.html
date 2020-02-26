@@ -26,24 +26,36 @@
 
 <div class="main">
   <div class="user_info">
-    <img src="{% static 'images/test.jpg' %}" alt="test" class="user_img">
-    <div class="user_id">
-      {{ user_id }}
+  <div>
+    <div class="box">
+      <span class="user_img">
+      <img src="{% static 'images/test.jpg' %}" alt="test">
+      </span>
+      <span class="user_id">
+        <p>{{ user_id }}</p>
+      </span>
+      </div>
+    <div class="button">
+      {% if user.is_authenticated %}
+      <button type="submit" class="btn btn-primary" id="modify_btn"onclick='location.href="{% url 'accounts:userinfomodify' %}"'>회원정보수정</button>
+      <button type="submit" class="btn btn-primary" onclick='location.href="{% url 'accounts:logout' %}"'>로그아웃</button>
+      {% endif %}
     </div>
-    {% if user.is_authenticated %}
-    <button type="submit" class="btn btn-primary" id="modify_btn"onclick='location.href="{% url 'accounts:userinfomodify' %}"'>회원정보수정</button>
-    <button type="submit" class="btn btn-primary" onclick='location.href="{% url 'accounts:logout' %}"'>로그아웃</button>
-    {% endif %}
+
+    <hr>
+
+    <div class="user_posts">
+    <section class="card_section">
+        <div class="card">
+          <div class="postBox">
+            <div class="postImg">
+              <img src="{% static 'images/test.jpg' %}" alt="상품 이미지" class="innerImg">
+            </div>
+          </div>
+        </div>
+    </section>    
+  </div>
+  </div>  
   </div>  
 </div>  
-
-<div class="post_list">
-<div class="user_posts">
-  <div class="postBox">
-    <div class="postImg">
-      <img src="{% static 'images/test.jpg' %}" alt="상품 이미지" class="innerImg">
-    </div>
-  </div>
-</div>
-</div>
 {% endblock body %}

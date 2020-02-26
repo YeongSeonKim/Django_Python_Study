@@ -1,28 +1,30 @@
-.post_list{
+.main{
     background-color: #efefef;
     display: flex;
     flex-direction: row;
     justify-content:center;
-    border-top: 1px solid #4a4a4a;
-    height: auto;
+    /* border-top: 1px solid #4a4a4a; */
+    height: 100vh;
     width: 100vw;
 }
-.userInfoBox{
-    background-color: #efefef;
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-}
+/* 사용자 프로필사진,아이디,정보수정버튼,로그아웃버튼*/
 .user_info{
-    display: flex;
+    display: block;
     justify-content: space-between;
     margin: 1rem 1rem 1rem 1rem;
+    align-items: flex-end;
+    width: 800px;
+    height: 150px;
+}
+.box{
+    /* text-align: center; */
     padding-right: 12rem;
     padding-left: 12rem;
-    align-items: flex-end;
-    height: 160px;
 }
-.user_img{
+.user_img {
+    display: contents;
+}
+.user_img img{
     border-radius: 50%;
     height: 130px;
     width: 130px;
@@ -30,21 +32,42 @@
     margin: 10px;
 }
 .user_id{
-    margin: 30px;
-    display: block;
+    display: inline-block;
+    margin-left: 20px;
 }
 .user_id p{
-    color: black;
+    font-size: large;
+    font-weight: bolder;
 }
-.user_posts{
-    /* background-color: white; */
+.button{
+    display: block;
+    text-align: end;
+}
+/* 포스트 리스트 모아보기 부분 */
+.post_list{
+    background-color: #efefef;
+    display: block;
+    flex-direction: row;
+    justify-content:center;
+    border-top: 1px solid #4a4a4a;
+    height: auto;
+    width: 100vw;
+}
+/* .user_posts{
+    background-color: white;
     width: 500px;
-}
+} */
 .card{
     border: 1px solid #c7c7c7;
     background-color: #fafafa;
     width: 800px;
     height: auto;
+}
+.userInfoBox{
+    background-color: #efefef;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
 }
 .postBox{
     display: inline-block;
