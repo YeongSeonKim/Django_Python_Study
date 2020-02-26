@@ -49,7 +49,9 @@
       <div class="card">
         <div class="postBox">
           <div class="postImg">
-            <img src="{% static 'images/test.jpg' %}" alt="상품 이미지" class="innerImg">
+            <a href="{% url 'instagram:post_detail' %}">
+              <img src="{% static 'images/test.jpg' %}" alt="상품 이미지" class="innerImg">
+            </a>  
           </div>
         </div>
       </div>
