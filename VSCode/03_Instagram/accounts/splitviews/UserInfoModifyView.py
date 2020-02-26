@@ -4,11 +4,7 @@ def UserInfoModifyView(request):
     if request.method == 'GET':
         user = request.user
 
-        context = {
-            'user' : user,
-        }
-
-        return render(request,'accounts/user_info_modify.html', context)
+        return render(request,'accounts/user_info_modify.html')
     
     else:
         profile_img_file = request.FILES.get('profile_img_file')
