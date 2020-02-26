@@ -34,28 +34,26 @@
       <span class="user_id">
         <p>{{ user_id }}</p>
       </span>
-      </div>
+    </div>
     <div class="button">
       {% if user.is_authenticated %}
       <button type="submit" class="btn btn-primary" id="modify_btn"onclick='location.href="{% url 'accounts:userinfomodify' %}"'>회원정보수정</button>
       <button type="submit" class="btn btn-primary" onclick='location.href="{% url 'accounts:logout' %}"'>로그아웃</button>
       {% endif %}
     </div>
+  </div>  
 
     <hr>
 
-    <div class="user_posts">
-    <section class="card_section">
-        <div class="card">
-          <div class="postBox">
-            <div class="postImg">
-              <img src="{% static 'images/test.jpg' %}" alt="상품 이미지" class="innerImg">
-            </div>
+  <div class="user_posts">
+      <div class="card">
+        <div class="postBox">
+          <div class="postImg">
+            <img src="{% static 'images/test.jpg' %}" alt="상품 이미지" class="innerImg">
           </div>
         </div>
-    </section>    
-  </div>
-  </div>  
-  </div>  
+      </div>
+  </div> 
+
 </div>  
 {% endblock body %}
