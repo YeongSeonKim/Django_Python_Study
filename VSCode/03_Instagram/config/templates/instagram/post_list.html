@@ -37,7 +37,8 @@
     </div>
     <div class="button">
       {% if user.is_authenticated %}
-      <button type="submit" class="btn btn-primary" id="modify_btn"onclick='location.href="{% url 'accounts:userinfomodify' %}"'>회원정보수정</button>
+      <button type="submit" class="btn btn-primary" id="pw_modify_btn"onclick='location.href="{% url 'accounts:passwordmodify' %}"'>비밀번호 변경</button>
+      <button type="submit" class="btn btn-primary" id="info_modify_btn"onclick='location.href="{% url 'accounts:userinfomodify' %}"'>프로필 편집</button>
       <button type="submit" class="btn btn-primary" onclick='location.href="{% url 'accounts:logout' %}"'>로그아웃</button>
       {% endif %}
     </div>

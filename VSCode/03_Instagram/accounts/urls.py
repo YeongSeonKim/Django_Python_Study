@@ -8,4 +8,5 @@ urlpatterns = [
     re_path(r'^login/$', LoginView, name='login'),
     re_path(r'^logout/$', LogoutView, name='logout'),
     re_path(r'^userinfomodify/$', UserInfoModifyView, name='userinfomodify'),
+    re_path(r'^passwordmodify/$', PasswordModifyView, name='passwordmodify'),
 ]
