@@ -14,15 +14,15 @@
     margin: 1rem 1rem 1rem 1rem;
     align-items: flex-end;
     width: 800px;
-    height: 150px;
+    height: 230px;
 }
 .box{
     /* text-align: center; */
-    padding-right: 12rem;
-    padding-left: 12rem;
+    padding-right: 9rem;
+    padding-left: 9rem;
 }
 .user_img {
-    display: contents;
+    display: inline-block;
 }
 .user_img img{
     border-radius: 50%;
@@ -31,12 +31,51 @@
     border: 1px solid #efefef;
     margin: 10px;
 }
+.info{
+    display: inline-block;
+    justify-content: space-between;
+}
 .user_id{
     display: inline-block;
     margin-left: 20px;
 }
 .user_id p{
-    font-size: large;
+    font-size: x-large;
+    /* font-weight: bolder; */
+}
+.modify{
+    display: inline-block;
+    margin-left: 50px;
+}
+.number{
+    text-align: center;
+}
+.post_number{
+    display: inline-block;
+    margin-left: 50px;
+}
+.post_number p{
+    font-weight: bolder;
+}
+.follower_number{
+    display: inline-block;
+    margin-left: 50px;
+}
+.follower_number p{
+    font-weight: bolder;
+}
+.follow_number{
+    display: inline-block;
+    margin-left: 50px;
+}
+.follow_number p{
+    font-weight: bolder;
+}
+.profile_msg{
+    display: block;
+    text-align: center;
+}
+.profile_msg{
     font-weight: bolder;
 }
 .button{

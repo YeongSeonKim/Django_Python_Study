@@ -28,18 +28,42 @@
   <div class="user_info">
   <div>
     <div class="box">
-      <span class="user_img">
-      <img src="{% static 'images/test.jpg' %}" alt="test">
-      </span>
-      <span class="user_id">
-        <p>{{ user_id }}</p>
+      <div class="user_img">
+        <img src="{% static 'images/test.jpg' %}" alt="test">
+      </div>
+      <div class="info">
+        <span class="user_id">
+          <p>{{ user_id }}</p>
+        </span>
+        <span class="modify">
+        {% if user.is_authenticated %}
+          <!--프로필편집-->
+          <a href="{% url 'accounts:userinfomodify' %}"><i class="fas fa-address-card"></i></a>  
+          <!--비밀번호변경-->
+          <a href="{% url 'accounts:passwordmodify' %}"><i class="fas fa-key"></i></a>
+        {% endif %}
+        </span>
+
+        <div class="number">
+          <span class="post_number">
+            게시글 <p></p>
+          </span>
+          <span class="follower_number">
+            팔로워 <p></p>
+          </span>
+          <span class="follow_number">
+            팔로우 <p></p>
+          </span>
+        </div>
+      </div>
+      
+      <span class="profile_msg">
+        <p>{{ user.profile_msg }}</p>
       </span>
     </div>
     <div class="button">
       {% if user.is_authenticated %}
-      <button type="submit" class="btn btn-primary" id="pw_modify_btn"onclick='location.href="{% url 'accounts:passwordmodify' %}"'>비밀번호 변경</button>
-      <button type="submit" class="btn btn-primary" id="info_modify_btn"onclick='location.href="{% url 'accounts:userinfomodify' %}"'>프로필 편집</button>
-      <button type="submit" class="btn btn-primary" onclick='location.href="{% url 'accounts:logout' %}"'>로그아웃</button>
+        <button type="submit" class="btn btn-primary" onclick='location.href="{% url 'accounts:logout' %}"'>로그아웃</button>
       {% endif %}
     </div>
   </div>  
