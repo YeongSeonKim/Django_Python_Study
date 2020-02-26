@@ -53,16 +53,6 @@
     height: auto;
     width: 100vw;
 }
-/* .user_posts{
-    background-color: white;
-    width: 500px;
-} */
-.card{
-    border: 1px solid #c7c7c7;
-    background-color: #fafafa;
-    width: 800px;
-    height: auto;
-}
 .userInfoBox{
     background-color: #efefef;
     display: flex;
