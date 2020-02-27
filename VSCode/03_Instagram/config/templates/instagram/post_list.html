@@ -29,11 +29,11 @@
   <div>
     <div class="box">
       <div class="user_img">
-        <img src="{% static 'images/test.jpg' %}" alt="test">
+        <img src="{{ user.profile_img_src }}" alt="profile_img">
       </div>
       <div class="info">
         <span class="user_id">
-          <p>{{ user_id }}</p>
+          <p>{{ user.username }}</p>
         </span>
         <span class="modify">
         {% if user.is_authenticated %}
@@ -63,7 +63,7 @@
     </div>
     <div class="button">
       {% if user.is_authenticated %}
-        <button type="submit" class="btn btn-primary" onclick='location.href="{% url 'accounts:logout' %}"'>로그아웃</button>
+        <button type="submit" class="btn btn-primary" onclick='location.href="{% url "accounts:logout" %}"'>로그아웃</button>
       {% endif %}
     </div>
   </div>  
@@ -73,8 +73,8 @@
   <div class="user_posts">
       <div class="postBox">
         <div class="postImg">
-          <a href="{% url 'instagram:post_detail' %}">
-            <img src="{% static 'images/test.jpg' %}" alt="상품 이미지" class="innerImg">
+          <a href="{% url 'instagram:post_detail' post.post_id %}">
+            <img src="{{post.post_img_url}}" alt="상품 이미지" class="innerImg">
           </a>  
         </div>
       </div>

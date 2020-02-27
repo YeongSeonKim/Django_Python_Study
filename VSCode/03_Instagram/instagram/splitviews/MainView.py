@@ -16,7 +16,11 @@ def MainView(request):
     try:
         cursor = connection.cursor()
 
-        strSql = "SELECT post_id, user_id, post_img_src, content, time"
+        # strSql = ""
+        # strSql += ""
+
+
+        strSql = "SELECT post_id, user_id, post_img_url, content, time"
         strSql += " FROM post"
         strSql += " WHERE user_id IN"
         strSql += " ((SELECT following_id FROM following WHERE user_id = (%s)), (%s))"
@@ -30,7 +34,7 @@ def MainView(request):
             raw_data = {
                 'post_id' : data[0],
                 'user_id' : data[1],
-                'post_img_src' : data[2],
+                'post_img_url' : data[2],
                 'content' : data[3],
                 'time' : data[4],
             }
@@ -38,7 +42,6 @@ def MainView(request):
             posts.append(raw_data)
 
             context = {
-                'user_id' : user.username,
                 'posts' : posts,
             }
 
@@ -50,11 +53,7 @@ def MainView(request):
 
         messages.error(request, "포스트를 가져오는데 에러가 발생했습니다.")
 
-        context = {
-            'user_id' : user.username,
-        }
-
-        return render(request,'instagram/main.html', context)
+        return render(request,'instagram/main.html')
 
     finally:
         connection.close()

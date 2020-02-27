@@ -26,15 +26,19 @@
 
 <div class="main">
     <div class="main_left">
-      {% comment %} {% for post in posts %} {% endcomment %}
+    {% for post in posts %}
       <section class="card_section">
         <div class="card">
           <header>
-            <img src="{% static 'images/test.jpg' %}" alt="test">
-            <div class="user_id"><a href="{% url 'instagram:post_list' user_id %}">{{ post.user_id }}</a></div>
+            <img src="{{ user.profile_img_src }}" alt="post_user_profile_img">
+            <div class="user_id">
+              <a href="{% url 'instagram:post_list' user.username %}">
+                {{ post.user_id }}
+              </a>
+            </div>
           </header>
           <div class="card_image">
-            <img src="{% static 'images/test.jpg' %}" alt="test">
+            <img src="{{ post.post_img_url }}" alt="post_img">
             <p>{{ post.content }}</p>
           </div>
           <div class="info">
@@ -58,7 +62,7 @@
         </div>
       </div>
     </section>
-    {% comment %} {% endfor %} {% endcomment %}
+  {% endfor %}
   </div>
   
   <div class="main_right">
@@ -66,10 +70,12 @@
       <div class="card" id="card_right">
         <div>
           <span class="user_img">
-            <img src="{% static 'images/test.jpg' %}" alt="test">
+            <img src="{{ user.profile_img_src }}" alt="profile_img">
           </span>
           <span class="user_name">
-            <a href="{% url 'instagram:post_list' user_id %}">{{ user_id }}</a>
+            <a href="{% url 'instagram:post_list' user_id %}">
+              {{ user.username }}
+            </a>
           </span>
         </div>
       </div>

@@ -1,3 +1,8 @@
+import string
+import random
+import hashlib
+import base64
+
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.db import connection
 from django.contrib import messages
@@ -5,11 +10,9 @@ from django.contrib import messages
 from accounts.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login, logout
-import string
-import random
-import hashlib
-import base64
 from django.contrib.auth.hashers import pbkdf2
+# 파일 경로
+from django.core.files.storage import default_storage
 
 # 비밀번호 암호화
 def hashing_password(user_pw):
@@ -24,3 +27,5 @@ def hashing_password(user_pw):
     hashed_pw = base64.b64encode(hash).decode('ascii').strip()
 
     return salt, hashed_pw
+
+# 프로필편집 사진 업로드 

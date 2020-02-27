@@ -21,7 +21,6 @@ def PostListView(request, user_id):
             posts.append(raw_data)
 
             context = {
-                'user_id': user_id, 
                 'posts': posts,
                 }
 
