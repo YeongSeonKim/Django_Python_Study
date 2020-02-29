@@ -7,7 +7,7 @@
     height: 100vh;
     width: 100vw;
 }
-/* 사용자 프로필사진,아이디,정보수정버튼,로그아웃버튼*/
+/* 사용자 프로필사진,아이디,정보수정버튼,로그아웃버튼,팔로우버튼*/
 .user_info{
     display: block;
     justify-content: space-between;
@@ -82,6 +82,9 @@
 .button{
     display: block;
     text-align: end;
+}
+#follow_btn{
+    margin-left: 50px;
 }
 /* 포스트 리스트 모아보기 부분 */
 .post_list{
