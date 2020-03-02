@@ -11,7 +11,7 @@ from .common import *
 '''
 
 @login_required
-def PostModifyView(request):
+def PostModifyView(request, post_id):
     if request.method == 'GET':
         return render(request, 'instagram/post_modify.html')
     else:
