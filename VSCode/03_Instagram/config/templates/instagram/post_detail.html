@@ -52,7 +52,7 @@
                                 <span aria-hidden="true">&times;</span>
                                 </button>
 
-                                <button type="button" class="btn btn-secondary" onclick="location.href='#'">포스트 수정</button>
+                                <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'instagram:post_modify' %}'">포스트 수정</button>
                                 <button type="button" class="btn btn-secondary" onclick="location.href='#'">포스트 삭제</button>
                             </div>
                             </div>
@@ -61,8 +61,8 @@
                     </div>
                 </header>
                 <div class="card_image">
-                    <img src="{{post.post_img_url}}" alt="Image">
-                    <p>{{post.content}}</p>
+                    <img src="{{ post.post_img_url }}" alt="Image">
+                    <p>{{ post.content }}</p>
                 </div>
                 <div class="info">
                     <div class="info_left">
