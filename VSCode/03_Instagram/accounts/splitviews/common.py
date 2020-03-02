@@ -1,9 +1,13 @@
+import os
+import re
+import uuid
 import string
 import random
 import hashlib
 import base64
 
-from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.contrib import messages
 # from django.contrib.auth.models import User
@@ -29,3 +33,20 @@ def hashing_password(user_pw):
     return salt, hashed_pw
 
 # 프로필편집 사진 업로드 
+def profileImageFileUpload(user, profileImg):
+    fileName, extension = os.path.splitext(profileImg.name)
+
+    newFileName = str(uuid.uuid4()) + extension
+    filePath = os.path.join('image', user.username, 'profile', newFileName)
+
+    default_storage.save(filePath, profileImg)
+    profile_img_url = default_storage.url(filePath)
+
+    return profile_img_url
+
+# 프로필편집 사진 삭제
+def profileImageFileDelete(profile_img_src):
+    tmp_path = re.findall(r'image.*', profile_img_src)
+    delete_path = tmp_path[0]
+
+    default_storage.delete(delete_path)

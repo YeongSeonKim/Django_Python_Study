@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.db import connection
 from django.contrib import messages
+from accounts.models import User
 # 파일 경로 / default_storage.save(path, file)
 from django.core.files.storage import default_storage
 

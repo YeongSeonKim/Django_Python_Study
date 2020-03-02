@@ -17,7 +17,11 @@
     <a href="#"><i class="far fa-compass"></i></a>
     <a href="#"><i class="far fa-heart"></i></a>
     {% if user.is_authenticated %}
-    <a href="{% url 'instagram:post_list' user_id %}"><img src="{% static 'images/test.jpg' %}" alt="test" class="navUserImg"></a>
+      {% if user.profile_img_src == '' %}
+        <a href="{% url 'instagram:post_list' user.username %}"><img src="{% static 'images/login.png' %}" alt="profile_img" class="navUserImg"></a>
+      {% else %}
+        <a href="{% url 'instagram:post_list' user.username %}"><img src="{{ user.profile_img_src }}" alt="profile_img" class="navUserImg"></a>
+      {% endif %}
     {% else %}
     <a href="{% url 'accounts:login' %}"><i class="far fa-user"></i></a>
     {% endif %}

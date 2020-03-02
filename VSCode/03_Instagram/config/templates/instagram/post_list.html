@@ -11,7 +11,7 @@
 {% endblock title %}
 
 {% block _nav %}
-  {% include 'instagram/_nav.html' %}
+  {% include '_nav.html' %}
 {% endblock _nav %}
 
 {% block body %}
@@ -38,21 +38,24 @@
         <span class="modify">
         {% if user.is_authenticated %}
           <!--프로필편집-->
-          <a href="{% url 'accounts:userinfomodify' %}"><i class="fas fa-address-card"></i></a>  
+          <a href="{% url 'accounts:user_info_modify' %}"><i class="fas fa-address-card"></i></a>  
           <!--비밀번호변경-->
-          <a href="{% url 'accounts:passwordmodify' %}"><i class="fas fa-key"></i></a>
+          <a href="{% url 'accounts:password_modify' %}"><i class="fas fa-key"></i></a>
         {% endif %}
         </span>
 
         <div class="number">
           <span class="post_number">
+            {% comment %} 게시글 <p>{{ postCount }}</p> {% endcomment %}
             게시글 <p></p>
           </span>
           <span class="follower_number">
+            {% comment %} 팔로워 <p>{{ followerCount }}</p> {% endcomment %}
             팔로워 <p></p>
           </span>
           <span class="follow_number">
-            팔로우 <p></p>
+            {% comment %} 팔로잉 <p>{{ followingCount }}</p> {% endcomment %}
+            팔로잉 <p></p>
           </span>
         </div>
       </div>
@@ -62,9 +65,9 @@
       </span>
     </div>
     <div class="button">
-        <button type="submit" class="btn btn-primary" id="follow_btn" onclick='location.href="#"'>팔로우</button>
+        <button type="button" class="btn btn-primary" id="follow_btn" onclick="location.href='#'">팔로우</button>
       {% if user.is_authenticated %}
-        <button type="submit" class="btn btn-primary" onclick='location.href="{% url "accounts:logout" %}"'>로그아웃</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='{% url 'accounts:logout' %}'">로그아웃</button>
       {% endif %}
     </div>
   </div>  
@@ -72,13 +75,15 @@
     <hr>
 
   <div class="user_posts">
+  {% for post in posts %}
       <div class="postBox">
         <div class="postImg">
           <a href="{% url 'instagram:post_detail' post.post_id %}">
-            <img src="{{post.post_img_url}}" alt="상품 이미지" class="innerImg">
+            <img src="{{ post.post_img_url }}" alt="post_img" class="innerImg">
           </a>  
         </div>
       </div>
+  {% endfor %}
   </div> 
 
 </div>  

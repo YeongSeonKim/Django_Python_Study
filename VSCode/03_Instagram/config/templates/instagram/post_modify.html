@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/post_create.css' %}">
-  <!-- Fontawesome 적용 -->
-  <script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/post_modify.css' %}">
+    <!-- Fontawesome 적용 -->
+    <script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
 {% endblock head %}
 
 {% block title %}
-글 작성하기 | Instagram
+포스트 수정 페이지 | Instagram
 {% endblock title %}
 
 {% block _nav %}
@@ -15,14 +15,23 @@
 {% endblock _nav %}
 
 {% block body %}
+
+{% if messages %}
+  <div >
+    {% for message in messages %}
+      {{ message.tags }}! {{ message.message }}
+    {% endfor %}
+  </div>
+{% endif %}
+
 <div class="main">
   <section class="card_section">
     <div class="card">
-      <form action="#" method="POST" enctype="multipart/form-data" class="post_create_form">
+      <form action="{% url 'instagram:post_upload' %}" method="POST" enctype="multipart/form-data" class="post_modify_form">
       {% csrf_token %}
         <div class="form-group">
-          {% comment %} <input type="textarea" class="form-control" id="content" name="content" placeholder="내용을 입력해주세요."> {% endcomment %}
-          <textarea name="content" rows="10" cols="133">
+          <textarea name="content" rows="10" cols="128">
+            {{ post.content }}
           </textarea>
         </div>
         <div class="input-group mb-3">
@@ -40,20 +49,20 @@
   </section>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-      $('#postImg').change(function(e){
-          var fileName = e.target.files[0].name;
-          $('.custom-file-label').html(fileName);
-      });
+    $('#postImg').change(function(e){
+      var fileName = e.target.files[0].name;
+      $('.custom-file-label').html(fileName);
+    });
 
-      $('.btn').click(function(e){
-          if ($('#post_img').val() == '') {
-              alert("사진을 선택해주세요.");
-              return false;
-          }
-      });
+    $('.btn').click(function(e){
+      if ($('#post_img').val() == '') {
+        alert("사진을 선택해주세요.");
+        return false;
+      }
+    });
   });
 </script>
-
 {% endblock body %}

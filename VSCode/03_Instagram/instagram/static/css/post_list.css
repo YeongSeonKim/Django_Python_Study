@@ -4,7 +4,7 @@
     flex-direction: row;
     justify-content:center;
     /* border-top: 1px solid #4a4a4a; */
-    height: 100vh;
+    height: auto;
     width: 100vw;
 }
 /* 사용자 프로필사진,아이디,정보수정버튼,로그아웃버튼,팔로우버튼*/
@@ -13,8 +13,8 @@
     justify-content: space-between;
     margin: 1rem 1rem 1rem 1rem;
     align-items: flex-end;
-    width: 800px;
-    height: 230px;
+    width: 880px;
+    height: auto;
 }
 .box{
     /* text-align: center; */
@@ -84,27 +84,12 @@
     text-align: end;
 }
 #follow_btn{
-    margin-left: 50px;
+    margin-right: 10px;
 }
 /* 포스트 리스트 모아보기 부분 */
-.post_list{
-    background-color: #efefef;
-    display: block;
-    flex-direction: row;
-    justify-content:center;
-    border-top: 1px solid #4a4a4a;
-    height: auto;
-    width: 100vw;
-}
-.userInfoBox{
-    background-color: #efefef;
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-}
 .postBox{
     display: inline-block;
-    }
+}
 .innerImg{
     width: 250px;
     height: 250px;

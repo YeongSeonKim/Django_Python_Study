@@ -7,14 +7,15 @@ body{
     flex-direction: row;
     justify-content:center;
     /* border-top: 1px solid #4a4a4a; */
-    height: 100vh;
+    height: auto;
     width: 100vw;
 }
 .card{
     border: 1px solid #c7c7c7;
     background-color: #fafafa;
     width: 600px;
-    height: 600px;
+    height: auto;
+    margin: 20px;
 }
 header img{
     border-radius: 50%;
@@ -36,8 +37,10 @@ header img{
     border: 1px solid #efefef;
     margin: 10px;
 }
-.user_name{
-    text-align: center;
+.three_dots_btn{
+    position: absolute;
+    display: inline;
+    margin-left: 420px;
 }
 .info{
     display: flex;

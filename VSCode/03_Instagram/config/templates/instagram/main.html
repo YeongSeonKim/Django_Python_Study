@@ -11,7 +11,7 @@
 {% endblock title %}
 
 {% block _nav %}
-  {% include 'instagram/_nav.html' %}
+  {% include '_nav.html' %}
 {% endblock _nav %}
 
 {% block body %}
@@ -30,9 +30,13 @@
       <section class="card_section">
         <div class="card">
           <header>
-            <img src="{{ user.profile_img_src }}" alt="post_user_profile_img">
+            {% if post.postUser.profile_img_src == '' %}
+              <img src="{% static 'images/login.png' %}" alt="Image">
+            {% else %}
+              <img src="{{ post.postUser.profile_img_src }}" alt="post_user_profile_img">
+            {% endif %}
             <div class="user_id">
-              <a href="{% url 'instagram:post_list' user.username %}">
+              <a href="{% url 'instagram:post_list' post.user_id %}">
                 {{ post.user_id }}
               </a>
             </div>
@@ -45,11 +49,19 @@
             <div class="info_left">
               <i class="far fa-heart"></i>
               <i class="far fa-comment"></i>
-              <i class="fas fa-upload"></i>
+              {% comment %} <i class="fas fa-upload"></i> {% endcomment %}
           </div>
           <div class="info_right">
             <i class="far fa-bookmark"></i>
           </div>
+        </div>
+        <div class="info2">
+          <span class="like_number">
+            좋아요 <p></p> 개
+          </span>
+          <span class="upload_time">
+            업로드 시간 <p></p>
+          </span>
         </div>
         <div class="comment">
             comment1<br>
@@ -70,10 +82,14 @@
       <div class="card" id="card_right">
         <div>
           <span class="user_img">
-            <img src="{{ user.profile_img_src }}" alt="profile_img">
+            {% if user.profile_img_src == '' %}
+              <img src="{% static 'images/login.png' %}" alt="Image">
+            {% else %}
+              <img src="{{ user.profile_img_src }}" alt="profile_img">
+            {% endif %}
           </span>
           <span class="user_name">
-            <a href="{% url 'instagram:post_list' user_id %}">
+            <a href="{% url 'instagram:post_list' user.username %}">
               {{ user.username }}
             </a>
           </span>
@@ -81,5 +97,6 @@
       </div>
     </div>
   </div>
+  
 </div>
 {% endblock body %}
