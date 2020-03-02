@@ -42,7 +42,7 @@ header img{
 .info i{
     font-size: 1.5rem;
 }
-.info2{
+.like_time{
     display: flex;
     justify-content: space-between;
 }
