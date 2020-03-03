@@ -16,6 +16,23 @@
 
 {% block body %}
 
+<!-- Modal -->
+<div class="modal fade" id="postEditModal" tabindex="-1" role="dialog" aria-labelledby="postEditModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+
+            <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'instagram:post_modify' post.post_id %}'">포스트 수정</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href='#'">포스트 삭제</button>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal End -->
+
 {% if messages %}
     <div>
         {% for message in messages %}
@@ -37,27 +54,9 @@
                     </div>
                     <div class="three_dots_btn">
                         <!-- Button trigger modal -->
-                        <a href="#" data-toggle="modal" data-target="#exampleModal">
+                        <a href="#" data-toggle="modal" data-target="#postEditModal">
                             <i class="fas fa-ellipsis-h"></i>
                         </a>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                            {% comment %} <div class="modal-header">
-                                <h6 class="modal-title" id="exampleModalLabel">포스트 수정 / 삭제</h6>
-                            </div> {% endcomment %}
-                            <div class="modal-body">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-
-                                <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'instagram:post_modify' %}'">포스트 수정</button>
-                                <button type="button" class="btn btn-secondary" onclick="location.href='#'">포스트 삭제</button>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
                     </div>
                 </header>
                 <div class="card_image">

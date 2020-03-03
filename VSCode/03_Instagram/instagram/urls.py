@@ -11,7 +11,7 @@ urlpatterns = [
     re_path(r'^(?P<user_id>[a-zA-Z0-9-_.]*)/$', PostListView, name='post_list'),
     re_path(r'^p/(?P<post_id>[0-9]+)/$', PostDetailView, name='post_detail'),  
     re_path(r'^p/upload/$', PostUploadView, name='post_upload'),  
-    re_path(r'^p/modify/$', PostModifyView, name='post_modify'),  
+    re_path(r'^p/modify/(?P<post_id>[0-9]+)/$', PostModifyView, name='post_modify'),  
 ]
 
 # MEDIA 파일 설정
