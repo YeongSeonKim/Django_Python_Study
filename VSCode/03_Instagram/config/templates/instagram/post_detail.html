@@ -21,12 +21,16 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
         <div class="modal-body">
+            <!-- close_btn -->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
+            <!-- modify_btn -->
+            <button type="button" class="btn btn-secondary" id="modify_btn" onclick="location.href='{% url 'instagram:post_modify' post.post_id %}'">포스트 수정</button>
+            <!-- delete_btn -->
+            <button type="button" class="btn btn-secondary" id="delete_btn" onclick="location.href='#'">포스트 삭제</button>
+            
 
-            <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'instagram:post_modify' post.post_id %}'">포스트 수정</button>
-            <button type="button" class="btn btn-secondary" onclick="location.href='#'">포스트 삭제</button>
         </div>
     </div>
 </div>
