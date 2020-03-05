@@ -55,8 +55,7 @@ header img{
     display: inline-block;
 }
 .upload_time{
-    margin-right: 120px;
-    
+   margin-right: 15px;    
 }
 .upload_time p{
     font-weight: bolder;

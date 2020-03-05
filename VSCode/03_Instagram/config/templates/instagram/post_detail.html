@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
-    <!-- Fontawesome 적용 -->
-    <script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/post_detail.css' %}">
+<!-- Fontawesome 적용 -->
+<script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
 {% endblock head %}
 
 {% block title %}
@@ -11,83 +11,91 @@
 {% endblock title %}
 
 {% block _nav %}
-  {% include '_nav.html' %}
+{% include '_nav.html' %}
 {% endblock _nav %}
 
 {% block body %}
 
 <!-- Modal -->
-<div class="modal fade" id="postEditModal" tabindex="-1" role="dialog" aria-labelledby="postEditModalLabel" aria-hidden="true">
-<div class="modal-dialog" role="document">
+<div class="modal fade" id="postEditModal" tabindex="-1" role="dialog" aria-labelledby="postEditModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-        <div class="modal-body">
-            <!-- close_btn -->
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-            <!-- modify_btn -->
-            <button type="button" class="btn btn-secondary" id="modify_btn" onclick="location.href='{% url 'instagram:post_modify' post.post_id %}'">포스트 수정</button>
-            <!-- delete_btn -->
-            <button type="button" class="btn btn-secondary" id="delete_btn" onclick="location.href='#'">포스트 삭제</button>
-            
-
-        </div>
+      <div class="modal-body">
+        <!-- close_btn -->
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- modify_btn -->
+        <button type="button" class="btn btn-secondary" id="modify_btn"
+          onclick="location.href='{% url 'instagram:post_modify' post.post_id %}'">포스트 수정</button>
+        <!-- delete_btn -->
+        <button type="button" class="btn btn-secondary" id="delete_btn" onclick="location.href='{% url 'instagram:post_delete' post.post_id %}'">포스트 삭제</button>
+      </div>
     </div>
-</div>
+  </div>
 </div>
 <!-- Modal End -->
 
 {% if messages %}
-    <div>
-        {% for message in messages %}
-            {{ message.tags }}! {{ message.message }}
-        {% endfor %}
-    </div>
+<div>
+  {% for message in messages %}
+  {{ message.tags }}! {{ message.message }}
+  {% endfor %}
+</div>
 {% endif %}
 
 <div class="main">
-    <div class="main_left">
-        <section class="card_section">
-            <div class="card">
-                <header>
-                    <img src="{{ postDetailUser.profile_img_src }}" alt="test">
-                    <div class="user_id">
-                        <a href="{% url 'instagram:post_list' postDetailUser.username %}">
-                            {{ postDetailUser.username }}
-                        </a>
-                    </div>
-                    <div class="three_dots_btn">
-                        <!-- Button trigger modal -->
-                        <a href="#" data-toggle="modal" data-target="#postEditModal">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </a>
-                    </div>
-                </header>
-                <div class="card_image">
-                    <img src="{{ post.post_img_url }}" alt="Image">
-                    <p>{{ post.content }}</p>
-                </div>
-                <div class="info">
-                    <div class="info_left">
-                        <i class="far fa-heart"></i>
-                        <i class="far fa-comment"></i>
-                        <i class="fas fa-upload"></i>
-                    </div>
-                    <div class="info_right">
-                        <i class="far fa-bookmark"></i>
-                    </div>
-                </div>
-                <div class="comment">
-                    comment1<br>
-                    comment2<br>
-                </div>
-                <div class="comment_form">
-                    <form action="">
-                        <input type="text" placeholder="댓글 입력..">
-                    </form>
-                </div>
-            </div>
-        </section>
-    </div>
+  <div class="main_left">
+    <section class="card_section">
+      <div class="card">
+        <header>
+          <img src="{{ postDetailUser.profile_img_src }}" alt="test">
+          <div class="user_id">
+            <a href="{% url 'instagram:post_list' postDetailUser.username %}">
+              {{ postDetailUser.username }}
+            </a>
+          </div>
+          <div class="three_dots_btn">
+            <!-- Button trigger modal -->
+            <a href="#" data-toggle="modal" data-target="#postEditModal">
+              <i class="fas fa-ellipsis-h"></i>
+            </a>
+          </div>
+        </header>
+        <div class="card_image">
+          <img src="{{ post.post_img_url }}" alt="Image">
+          <p>{{ post.content }}</p>
+        </div>
+        <div class="info">
+          <div class="info_left">
+            <i class="far fa-heart"></i>
+            <i class="far fa-comment"></i>
+            {% comment %} <i class="fas fa-upload"></i> {% endcomment %}
+          </div>
+          <div class="info_right">
+            <i class="far fa-bookmark"></i>
+          </div>
+        </div>
+        <div class="like_time">
+          <span class="like_number">
+            좋아요 <p></p> 개
+          </span>
+          <span class="upload_time">
+            <p>{{ post.time }}</p>
+          </span>
+        </div>
+        <div class="comment">
+          comment1<br>
+          comment2<br>
+        </div>
+        <div class="comment_form">
+          <form action="">
+            <input type="text" placeholder="댓글 입력..">
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
 {% endblock body %}

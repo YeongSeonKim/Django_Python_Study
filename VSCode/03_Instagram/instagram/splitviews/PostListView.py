@@ -9,7 +9,13 @@ from .common import *
 
 def PostListView(request, user_id):
     user = request.user
-    # postListUser = User.objects.get(username=user.username)
+
+    try:
+        postListUser = User.objects.get(username=user_id)
+    
+    except ObjectDoesNotExist:
+        messages.error(request, '존재하지 않는 계정입니다.')
+        return render(request, 'instagram/post_list.html')
 
     try:
         cursor = connection.cursor()
@@ -37,7 +43,7 @@ def PostListView(request, user_id):
         # strSql += " FROM follwing"
         # strSql += " WHERE following_id = (%s)"
 
-        # result = cursor.execute(strSql, (following_id,))
+        # result = cursor.execute(strSql, (user_id,))
         # data = cursor.fetchall()
         # followerCount = data[0][0]
 
@@ -69,14 +75,14 @@ def PostListView(request, user_id):
             posts.append(raw_data)
             print(raw_data)
 
-            context = {
-                # 'postListUser' : postListUser,
-                # 'postCount' : postCount,
-                # 'followingCount' : followingCount,
-                # 'followerCount' : followerCount,
-                # 'follow' : follow,
-                'posts': posts,
-                }
+        context = {
+            'postListUser' : postListUser,
+            # 'postCount' : postCount,
+            # 'followingCount' : followingCount,
+            # 'followerCount' : followerCount,
+            # 'follow' : follow,
+            'posts': posts,
+            }
 
         return render(request, 'instagram/post_list.html', context)
 
@@ -87,7 +93,10 @@ def PostListView(request, user_id):
 
         messages.error(request, '포스트를 가져오는데 에러가 발생하였습니다.')
 
-        return render(request, 'instagram/post_list.html')
+        context = {
+            'user_id' : user_id,
+        }
+        return render(request, 'instagram/post_list.html', context)
 
     finally:
         connection.close()

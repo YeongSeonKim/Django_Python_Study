@@ -41,11 +41,11 @@ def MainView(request):
             posts.append(raw_data)
             print(raw_data)
 
-            context = {
-                'posts' : posts,
-            }
+        context = {
+            'posts' : posts,
+        }
 
-            return render(request,'instagram/main.html', context)
+        return render(request,'instagram/main.html', context)
 
     except:
         connection.rollback()

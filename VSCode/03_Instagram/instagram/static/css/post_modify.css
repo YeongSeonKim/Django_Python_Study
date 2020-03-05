@@ -13,16 +13,16 @@ body{
 .card{
     border: 1px solid #c7c7c7;
     background-color: #fafafa;
-    width: 1000px;
+    width: 600px;
     height: auto;
-    margin-top: 20px;
+    margin: 20px;
 }
 .post_modify_form{
     margin: 20px;
 }
 #post_img img{
-    width: 960px;
+    width: 100%;
 }
 #modify_content textarea{
-    width: 960px;
+    width: 100%;
 }

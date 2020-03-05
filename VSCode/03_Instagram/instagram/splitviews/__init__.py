@@ -4,3 +4,4 @@ from .PostListView import *
 from .PostUploadView import *
 from .PostDetailView import *
 from .PostModifyView import *
+from .PostDeleteView import *

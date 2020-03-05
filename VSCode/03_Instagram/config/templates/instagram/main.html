@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-  <!-- Fontawesome 적용 -->
-  <script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!-- Fontawesome 적용 -->
+<script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
 {% endblock head %}
 
 {% block title %}
@@ -11,45 +11,45 @@
 {% endblock title %}
 
 {% block _nav %}
-  {% include '_nav.html' %}
+{% include '_nav.html' %}
 {% endblock _nav %}
 
 {% block body %}
 
 {% if messages %}
-  <div>
-    {% for message in messages %}
-      {{ message.tags }}! {{ message.message }}
-    {% endfor %}
-  </div>
+<div>
+  {% for message in messages %}
+  {{ message.tags }}! {{ message.message }}
+  {% endfor %}
+</div>
 {% endif %}
 
 <div class="main">
-    <div class="main_left">
+  <div class="main_left">
     {% for post in posts %}
-      <section class="card_section">
-        <div class="card">
-          <header>
-            {% if post.postUser.profile_img_src == '' %}
-              <img src="{% static 'images/login.png' %}" alt="Image">
-            {% else %}
-              <img src="{{ post.postUser.profile_img_src }}" alt="post_user_profile_img">
-            {% endif %}
-            <div class="user_id">
-              <a href="{% url 'instagram:post_list' post.user_id %}">
-                {{ post.user_id }}
-              </a>
-            </div>
-          </header>
-          <div class="card_image">
-            <img src="{{ post.post_img_url }}" alt="post_img">
-            <p>{{ post.content }}</p>
+    <section class="card_section">
+      <div class="card">
+        <header>
+          {% if post.postUser.profile_img_src == '' %}
+          <img src="{% static 'images/login.png' %}" alt="Image">
+          {% else %}
+          <img src="{{ post.postUser.profile_img_src }}" alt="post_user_profile_img">
+          {% endif %}
+          <div class="user_id">
+            <a href="{% url 'instagram:post_list' post.user_id %}">
+              {{ post.user_id }}
+            </a>
           </div>
-          <div class="info">
-            <div class="info_left">
-              <i class="far fa-heart"></i>
-              <i class="far fa-comment"></i>
-              {% comment %} <i class="fas fa-upload"></i> {% endcomment %}
+        </header>
+        <div class="card_image">
+          <img src="{{ post.post_img_url }}" alt="post_img">
+          <p>{{ post.content }}</p>
+        </div>
+        <div class="info">
+          <div class="info_left">
+            <i class="far fa-heart"></i>
+            <i class="far fa-comment"></i>
+            {% comment %} <i class="fas fa-upload"></i> {% endcomment %}
           </div>
           <div class="info_right">
             <i class="far fa-bookmark"></i>
@@ -60,32 +60,32 @@
             좋아요 <p></p> 개
           </span>
           <span class="upload_time">
-            업로드 시간 <p></p>
+            <p>{{ post.time }}</p>
           </span>
         </div>
         <div class="comment">
-            comment1<br>
-            comment2<br>
+          comment1<br>
+          comment2<br>
         </div>
         <div class="comment_form">
-            <form action="">
-                <input type="text" placeholder="댓글 입력..">
-            </form>
+          <form action="">
+            <input type="text" placeholder="댓글 입력..">
+          </form>
         </div>
       </div>
     </section>
-  {% endfor %}
+    {% endfor %}
   </div>
-  
+
   <div class="main_right">
     <div id="fixed_nav">
       <div class="card" id="card_right">
         <div>
           <span class="user_img">
             {% if user.profile_img_src == '' %}
-              <img src="{% static 'images/login.png' %}" alt="Image">
+            <img src="{% static 'images/login.png' %}" alt="Image">
             {% else %}
-              <img src="{{ user.profile_img_src }}" alt="profile_img">
+            <img src="{{ user.profile_img_src }}" alt="profile_img">
             {% endif %}
           </span>
           <span class="user_name">
@@ -97,6 +97,6 @@
       </div>
     </div>
   </div>
-  
+
 </div>
 {% endblock body %}
