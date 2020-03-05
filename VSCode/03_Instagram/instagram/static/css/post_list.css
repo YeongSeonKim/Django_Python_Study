@@ -65,11 +65,11 @@
 .follower_number p{
     font-weight: bolder;
 }
-.following_number{
+.follow_number{
     display: inline-block;
     margin-left: 50px;
 }
-.following_number p{
+.follow_number p{
     font-weight: bolder;
 }
 /* Modal */
