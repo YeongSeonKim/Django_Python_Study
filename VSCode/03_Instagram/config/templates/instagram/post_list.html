@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/post_list.css' %}">
-  <!-- Fontawesome 적용 -->
-  <script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/post_list.css' %}">
+<!-- Fontawesome 적용 -->
+<script src="https://kit.fontawesome.com/0b02921f0e.js" crossorigin="anonymous"></script>
 {% endblock head %}
 
 {% block title %}
@@ -11,18 +11,18 @@
 {% endblock title %}
 
 {% block _nav %}
-  {% include '_nav.html' %}
+{% include '_nav.html' %}
 {% endblock _nav %}
 
 {% block body %}
 
 <!-- Modal -->
-<div class="modal fade" id="FollowingModalScrollable" tabindex="-1" role="dialog" aria-labelledby="FollowingModalScrollableTitle"
-  aria-hidden="true">
+<div class="modal fade" id="FollowingModalScrollable" tabindex="-1" role="dialog"
+  aria-labelledby="FollowingModalScrollableTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">
-          <p class="modal-title" id="FollowingModalScrollableTitle">팔로잉</p>
+        <p class="modal-title" id="FollowingModalScrollableTitle">팔로잉</p>
         <!-- close_btn -->
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -52,86 +52,94 @@
 <!-- Modal End -->
 
 {% if messages %}
-  <div>
-    {% for message in messages %}
-      {{ message.tags }}! {{ message.message }}
-    {% endfor %}
-  </div>
+<div>
+  {% for message in messages %}
+  {{ message.tags }}! {{ message.message }}
+  {% endfor %}
+</div>
 {% endif %}
 
 <div class="main">
   <div class="user_info">
-  <div>
-    <div class="box">
-      <div class="user_img">
-        {% if postListUser.profile_img_src == '' %}
+    <div>
+      <div class="box">
+        <div class="user_img">
+          {% if postListUser.profile_img_src == '' %}
           <img src="{% static 'images/login.png' %}" alt="profile_img">
-        {% else %}
+          {% else %}
           <img src="{{ user.profile_img_src }}" alt="profile_img">
-        {% endif %}
-      </div>
-      <div class="info">
-        <span class="user_id">
-          <p>{{ postListUser.username }}</p>
-        </span>
-        <span class="modify">
-        {% if postListUser.username == user.username %}
-          {% if user.is_authenticated %}
+          {% endif %}
+        </div>
+        <div class="info">
+          <span class="user_id">
+            <p>{{ postListUser.username }}</p>
+          </span>
+          <span class="modify">
+            {% if postListUser.username == user.username %}
+            {% if user.is_authenticated %}
             <!--프로필편집-->
-            <a href="{% url 'accounts:user_info_modify' %}"><i class="fas fa-address-card"></i></a>  
+            <a href="{% url 'accounts:user_info_modify' %}"><i class="fas fa-address-card"></i></a>
             <!--비밀번호변경-->
             <a href="{% url 'accounts:password_modify' %}"><i class="fas fa-key"></i></a>
-          {% endif %}
-        {% endif %}  
-        </span>
+            {% endif %}
+            {% endif %}
+          </span>
 
-        <div class="number">
-          <span class="post_number">
-            {% comment %} 게시글 <p>{{ postCount }}</p> {% endcomment %}
-            게시글 <p></p>
-          </span>
-          <span class="follower_number">
-            {% comment %} 팔로워 <p>{{ followerCount }}</p> {% endcomment %}
-            팔로워 <p></p>
-          </span>
-          <span class="follow_number">
-            {% comment %} 팔로잉 <p>{{ followingCount }}</p> {% endcomment %}
-            <!-- Button trigger modal -->
-            <a href="#" data-toggle="modal" data-target="#FollowingModalScrollable">
-              팔로우 <p></p>
-            </a>
-          </span>
+          <div class="number">
+            <span class="post_number">
+              {% comment %} 게시글 <p>{{ postCount }}</p> {% endcomment %}
+              게시글 <p></p>
+            </span>
+            <span class="follower_number">
+              {% comment %} 팔로워 <p>{{ followerCount }}</p> {% endcomment %}
+              팔로워 <p></p>
+            </span>
+            <span class="follow_number">
+              {% comment %} 팔로잉 <p>{{ followingCount }}</p> {% endcomment %}
+              <!-- Button trigger modal -->
+              <a href="#" data-toggle="modal" data-target="#FollowingModalScrollable">
+                팔로우 <p></p>
+              </a>
+            </span>
+          </div>
         </div>
+
+        <span class="profile_msg">
+          <p>{{ postListUser.profile_msg }}</p>
+        </span>
       </div>
-      
-      <span class="profile_msg">
-        <p>{{ postListUser.profile_msg }}</p>
-      </span>
-    </div>
-    <div class="button">
-      {% if user.is_authenticated %}
+      <div class="button">
+        {% if user.is_authenticated %}
         {% if postListUser.username == user.username %}
-          <button type="button" class="btn btn-primary" onclick="location.href='{% url 'accounts:logout' %}'">로그아웃</button>
+        <button type="button" class="btn btn-primary"
+          onclick="location.href='{% url 'accounts:logout' %}'">로그아웃</button>
         {% endif %}
-      {% else %} 
+        {% else %}
         <button type="button" class="btn btn-primary" id="follow_btn" onclick="location.href='#'">팔로우</button>
-      {% endif %}
+        {% endif %}
+      </div>
     </div>
-  </div>  
 
     <hr>
-
-  <div class="user_posts">
-  {% for post in posts %}
-      <div class="postBox">
-        <div class="postImg">
-          <a href="{% url 'instagram:post_detail' post.post_id %}">
-            <img src="{{ post.post_img_url }}" alt="post_img" class="innerImg">
-          </a>  
+    <!-- 탭 메뉴 게시물/저장됨 -->
+    <div class="user_posts">
+      <nav>
+        <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+          <a class="nav-item nav-link active" id="nav-post-tab" data-toggle="tab" href="#nav-post" role="tab"
+            aria-controls="nav-post" aria-selected="true">게시글</a>
+          <a class="nav-item nav-link" id="nav-save_post-tab" data-toggle="tab" href="#nav-save_post" role="tab"
+            aria-controls="nav-save_post" aria-selected="false">저장됨</a>
+        </div>
+      </nav>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-post" role="tabpanel" aria-labelledby="nav-post-tab">
+          {% include 'instagram/user_posts.html' %}
+        </div>
+        <div class="tab-pane fade" id="nav-save_post" role="tabpanel" aria-labelledby="nav-save_post-tab">
+          {% include 'instagram/posts_save.html' %}
         </div>
       </div>
-  {% endfor %}
-  </div> 
+    </div>
 
-</div>  
-{% endblock body %}
+  </div>
+  {% endblock body %}
