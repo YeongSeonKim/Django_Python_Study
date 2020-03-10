@@ -67,7 +67,7 @@
           {% if postListUser.profile_img_src == '' %}
           <img src="{% static 'images/login.png' %}" alt="profile_img">
           {% else %}
-          <img src="{{ user.profile_img_src }}" alt="profile_img">
+          <img src="{{ postListUser.profile_img_src }}" alt="profile_img">
           {% endif %}
         </div>
         <div class="info">
