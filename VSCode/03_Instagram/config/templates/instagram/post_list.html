@@ -76,29 +76,26 @@
           </span>
           <span class="modify">
             {% if postListUser.username == user.username %}
-            {% if user.is_authenticated %}
-            <!--프로필편집-->
-            <a href="{% url 'accounts:user_info_modify' %}"><i class="fas fa-address-card"></i></a>
-            <!--비밀번호변경-->
-            <a href="{% url 'accounts:password_modify' %}"><i class="fas fa-key"></i></a>
-            {% endif %}
+              {% if user.is_authenticated %}
+                <!--프로필편집-->
+                <a href="{% url 'accounts:user_info_modify' %}"><i class="fas fa-address-card"></i></a>
+                <!--비밀번호변경-->
+                <a href="{% url 'accounts:password_modify' %}"><i class="fas fa-key"></i></a>
+              {% endif %}
             {% endif %}
           </span>
 
           <div class="number">
             <span class="post_number">
-              {% comment %} 게시글 <p>{{ postCount }}</p> {% endcomment %}
-              게시글 <p></p>
+              게시글 <p>{{ postCount }}</p>
             </span>
             <span class="follower_number">
-              {% comment %} 팔로워 <p>{{ followerCount }}</p> {% endcomment %}
-              팔로워 <p></p>
+              팔로워 <p>{{ followerCount }}</p>
             </span>
             <span class="follow_number">
-              {% comment %} 팔로잉 <p>{{ followingCount }}</p> {% endcomment %}
               <!-- Button trigger modal -->
               <a href="#" data-toggle="modal" data-target="#FollowingModalScrollable">
-                팔로우 <p></p>
+                팔로잉 <p>{{ followingCount }}</p>
               </a>
             </span>
           </div>
@@ -110,12 +107,16 @@
       </div>
       <div class="button">
         {% if user.is_authenticated %}
-        {% if postListUser.username == user.username %}
-        <button type="button" class="btn btn-primary"
-          onclick="location.href='{% url 'accounts:logout' %}'">로그아웃</button>
-        {% endif %}
-        {% else %}
-        <button type="button" class="btn btn-primary" id="follow_btn" onclick="location.href='#'">팔로우</button>
+          {% if postListUser.username == user.username %}
+            <button type="button" class="btn btn-primary"
+              onclick="location.href='{% url 'accounts:logout' %}'">로그아웃</button>
+            {% else %}
+              {% if follow == 0 %}
+                <button type="button" class="btn btn-primary" id="follow_btn" onclick="location.href='#'">팔로우</button>
+              {% elif follow == 1 %}
+                <button type="button" class="btn btn-primary" id="follow_btn" onclick="location.href='#'">팔로잉</button>
+              {% endif %}
+          {% endif %}
         {% endif %}
       </div>
     </div>

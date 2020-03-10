@@ -4,7 +4,8 @@ from .common import *
 [Instagram] 포스트 리스트 페이지
 : 사용자가 작성한 포스트만을 볼 수 있는 페이지
 1. 아이디가 클릭된 유저의 포스트 리스트를 SELECT
-2. 가져온 포스트를 post_list.html에 rendering
+2. [200310] 아이디가 클릭된 유저의 게시물 수, 팔로우 수, 팔로잉 수 SELECT
+3. 가져온 포스트를 post_list.html에 rendering
 '''
 
 def PostListView(request, user_id):
@@ -20,42 +21,42 @@ def PostListView(request, user_id):
     try:
         cursor = connection.cursor()
 
-        # # 게시글 수
-        # strSql = "SELECT COUNT(post_id)"
-        # strSql += " FROM post"
-        # strSql += " WHERE user_id = (%s)"
+        # 게시글 수
+        strSql = "SELECT COUNT(post_id)"
+        strSql += " FROM post"
+        strSql += " WHERE user_id = (%s)"
 
-        # result = cursor.execute(strSql, (user_id,))
-        # data = cursor.fetchall()
-        # postCount = data[0][0]
+        result = cursor.execute(strSql, (user_id,))
+        data = cursor.fetchall()
+        postCount = data[0][0]
 
-        # # 팔로잉 수
-        # strSql = "SELECT COUNT(following_id)"
-        # strSql += " FROM follwing"
-        # strSql += " WHERE user_id = (%s)"
+        # 팔로잉 수
+        strSql = "SELECT COUNT(following_id)"
+        strSql += " FROM following"
+        strSql += " WHERE user_id = (%s)"
 
-        # result = cursor.execute(strSql, (user_id,))
-        # data = cursor.fetchall()
-        # followingCount = data[0][0]
+        result = cursor.execute(strSql, (user_id,))
+        data = cursor.fetchall()
+        followingCount = data[0][0]
 
-        # # 팔로워 수
-        # strSql = "SELECT COUNT(user_id)"
-        # strSql += " FROM follwing"
-        # strSql += " WHERE following_id = (%s)"
+        # 팔로워 수
+        strSql = "SELECT COUNT(user_id)"
+        strSql += " FROM following"
+        strSql += " WHERE following_id = (%s)"
 
-        # result = cursor.execute(strSql, (user_id,))
-        # data = cursor.fetchall()
-        # followerCount = data[0][0]
+        result = cursor.execute(strSql, (user_id,))
+        data = cursor.fetchall()
+        followerCount = data[0][0]
 
-        # # 현재 로그인한 사용자의 클릭 된 사용자에 대한 팔로우 여부
-        # strSql = "SELECT COUNT(following_id)"
-        # strSql += " FROM following"
-        # strSql += " WHERE user_id = (%s)"
-        # strSql += " AND following_id = (%s)"
+        # 현재 로그인한 사용자의 클릭 된 사용자에 대한 팔로우 여부
+        strSql = "SELECT COUNT(following_id)"
+        strSql += " FROM following"
+        strSql += " WHERE user_id = (%s)"
+        strSql += " AND following_id = (%s)"
 
-        # result = cursor.execute(strSql, (user.username, postListUser.username))
-        # data = cursor.fetchall()
-        # follow = data[0][0]
+        result = cursor.execute(strSql, (user.username, postListUser.username))
+        data = cursor.fetchall()
+        follow = data[0][0]
 
         # 포스트 리스트
         strSql = "SELECT post_id, post_img_url"
@@ -77,10 +78,10 @@ def PostListView(request, user_id):
 
         context = {
             'postListUser' : postListUser,
-            # 'postCount' : postCount,
-            # 'followingCount' : followingCount,
-            # 'followerCount' : followerCount,
-            # 'follow' : follow,
+            'postCount' : postCount,
+            'followingCount' : followingCount,
+            'followerCount' : followerCount,
+            'follow' : follow,
             'posts': posts,
             }
 
