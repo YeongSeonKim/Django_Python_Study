@@ -2,11 +2,12 @@ import os
 import uuid # 랜덤문자열을 만들어줌
 import datetime 
 
+from accounts.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.db import connection
 from django.contrib import messages
-from accounts.models import User
 from django.core.exceptions import ObjectDoesNotExist
 # 파일 경로 / default_storage.save(path, file)
 from django.core.files.storage import default_storage
