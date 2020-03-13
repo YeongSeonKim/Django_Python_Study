@@ -133,9 +133,9 @@
               onclick="location.href='{% url 'accounts:logout' %}'">로그아웃</button>
             {% else %}
               {% if follow == 0 %}
-                <button type="button" class="btn btn-primary" id="follow_btn" onclick="follow(this, {{ postListUser.username }})">팔로우</button>
+                <button type="button" class="btn btn-primary" id="follow_btn" onclick="follow(this, '{{ postListUser.username }}')">팔로우</button>
               {% elif follow == 1 %}
-                <button type="button" class="btn btn-outline-primary" id="unfollow_btn" onclick="unfollow(this, {{ postListUser.username }})">팔로잉</button>
+                <button type="button" class="btn btn-outline-primary" id="unfollow_btn" onclick="unfollow(this, '{{ postListUser.username }}')">팔로잉</button>
               {% endif %}
           {% endif %}
         {% endif %}
