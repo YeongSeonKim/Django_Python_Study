@@ -1,9 +1,11 @@
 import os
 import uuid # 랜덤문자열을 만들어줌
 import datetime 
+import json
 
 from accounts.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.db import connection
