@@ -54,15 +54,14 @@
             {% if user.is_authenticated %}
                 {% if user.username != followingUser.username%}
                     {% if followingUser.follow == 0 %}
-                      <button type="button" class="btn btn-primary" onclick='follow(this, {{ followingUser.username }})'>팔로우</button>
+                      <button type="button" class="btn btn-primary" onclick="follow(this, '{{ followingUser.username }}')">팔로우</button>
                     {% elif followingUser.follow == 1 %}
-                      <button type="button" class="btn btn-outline-primary" onclick='unfollow(this, {{ followingUser.username }})'>팔로잉</button>
+                      <button type="button" class="btn btn-outline-primary" onclick="unfollow(this, '{{ followingUser.username }}')">팔로잉</button>
                     {% endif %}
                 {% endif %}
             {% endif %}
             </div>
-          </div>
-          
+          </div>      
           </div>
           {% endfor %}
         </div>

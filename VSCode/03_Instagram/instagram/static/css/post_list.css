@@ -126,6 +126,11 @@
     display: block;
     color: #999;
     margin-bottom: 0.2rem;
+    /* 글자수 제한 ... 으로 보이게 하는 부분 */
+    width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .following_btn{
     display: inline-flex;
