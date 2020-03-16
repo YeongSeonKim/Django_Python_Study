@@ -35,6 +35,9 @@ header img{
 .user_id{
     display: inline;
 }
+.content{
+    margin: 15px;
+}
 /* hashtag */
 .hashtag{
     color: blue;

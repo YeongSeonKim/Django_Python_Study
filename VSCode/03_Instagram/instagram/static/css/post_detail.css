@@ -70,6 +70,9 @@ header img{
 #delete_btn{
     display: block;
 }
+.content{
+    margin: 15px;
+}
 /* hashtag */
 .hashtag{
     color: blue;
