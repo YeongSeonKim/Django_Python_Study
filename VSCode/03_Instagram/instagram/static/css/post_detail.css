@@ -70,6 +70,10 @@ header img{
 #delete_btn{
     display: block;
 }
+/* hashtag */
+.hashtag{
+    color: blue;
+}
 .info{
     display: flex;
     justify-content: space-between;

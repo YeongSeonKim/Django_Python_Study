@@ -21,8 +21,11 @@
       <form action="#" method="POST" enctype="multipart/form-data" class="post_create_form">
       {% csrf_token %}
         <div class="form-group">
-          {% comment %} <input type="textarea" class="form-control" id="content" name="content" placeholder="내용을 입력해주세요."> {% endcomment %}
-          <textarea name="content" rows="10" cols="133"></textarea>
+          <textarea name="content" rows="10" cols="133" placeholder="문구 입력..."></textarea>
+        </div>
+        <!-- 해시태그 -->
+        <div class="form-group" id="hashtag_input">
+          <textarea name="content" rows="1" cols="133" placeholder="해시태그 입력..."></textarea>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
