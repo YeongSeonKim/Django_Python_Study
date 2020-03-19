@@ -50,7 +50,11 @@
     <section class="card_section">
       <div class="card">
         <header>
-          <img src="{{ postDetailUser.profile_img_src }}" alt="test">
+          {% if postDetailUser.profile_img_src == '' %}
+            <img src="{% static 'images/login.png' %}" alt="test">
+          {% else %}  
+            <img src="{{ postDetailUser.profile_img_src }}" alt="test">
+          {% endif %}  
           <div class="user_id">
             <a href="{% url 'instagram:post_list' postDetailUser.username %}">
               {{ postDetailUser.username }}
