@@ -17,8 +17,8 @@ urlpatterns = [
     re_path(r'^unfollow/(?P<following_id>[a-zA-Z0-9-_.]*)/$', UnfollowView, name='unfollow'),
     re_path(r'^like/(?P<post_id>[0-9]+)/$', LikePostView, name='like_post'),
     re_path(r'^unlike/(?P<post_id>[0-9]+)/$', UnlikePostView, name='unlike_post'),
-    re_path(r'^bookmark/(?P<post_id>[0-9]+)/$', BookmarkView, name='bookmark'),
-    re_path(r'^unbookmark/(?P<post_id>[0-9]+)/$', UnbookmarkView, name='unbookmark'),
+    re_path(r'^collection/(?P<post_id>[0-9]+)/$', CollectionView, name='collection'),
+    re_path(r'^uncollection/(?P<post_id>[0-9]+)/$', UncollectionView, name='uncollection'),
 ]
 
 # MEDIA 파일 설정

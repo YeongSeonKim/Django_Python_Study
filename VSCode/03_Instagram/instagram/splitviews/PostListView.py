@@ -4,9 +4,10 @@ from .common import *
 [Instagram] 포스트 리스트 페이지
 : 사용자가 작성한 포스트만을 볼 수 있는 페이지
 1. 아이디가 클릭된 유저의 포스트 리스트를 SELECT
-2. [200310] 아이디가 클릭된 유저의 게시물 수, 팔로우 수, 팔로잉 수 SELECT
-3. 팔로잉 리스트 모달에 띄울 팔로잉 유저 데이터 SELECT
-4. 가져온 포스트를 post_list.html에 rendering
+2. [200302] 아이디가 클릭된 유저의 게시물 수, 팔로우 수, 팔로잉 수 SELECT
+3. [200310] 팔로잉 리스트 모달에 띄울 팔로잉 유저 데이터 SELECT
+4. [200319] 현재 유저가 컬렉션(북마크)한 포스트 리스트 데이터 SELECT
+5. 가져온 포스트를 post_list.html에 rendering
 '''
 
 def PostListView(request, user_id):
@@ -59,24 +60,6 @@ def PostListView(request, user_id):
         data = cursor.fetchall()
         follow = data[0][0]
 
-        # 포스트 리스트
-        strSql = "SELECT post_id, post_img_url"
-        strSql += " FROM post"
-        strSql += " WHERE user_id = (%s)"
-        strSql += " ORDER BY time DESC"
-
-        result = cursor.execute(strSql, (user_id,))
-        datas = cursor.fetchall()
-
-        posts = []
-        for data in datas:
-            raw_data = {
-                'post_id': data[0],
-                'post_img_url': data[1],
-            }
-            posts.append(raw_data)
-            print(raw_data)
-
         # 아이디가 클릭 된 유저의 팔로잉 리스트
         strSql = "SELECT username, profile_img_src, profile_msg"
         strSql += " FROM accounts_user as AU"
@@ -105,18 +88,54 @@ def PostListView(request, user_id):
 
             followingUsers.append(raw_data)
 
+        # 포스트 리스트
+        strSql = "SELECT post_id, post_img_url"
+        strSql += " FROM post"
+        strSql += " WHERE user_id = (%s)"
+        strSql += " ORDER BY time DESC"
+
+        result = cursor.execute(strSql, (user_id,))
+        datas = cursor.fetchall()
+        
+        posts = []
+        for data in datas:
+            raw_data = {
+                'post_id': data[0],
+                'post_img_url': data[1],
+            }
+            posts.append(raw_data)
+            print(raw_data)
+
+        # 컬렉션 포스트 리스트
+        collection = []
+        if postListUser == user:
+            strSql = "SELECT P.post_id, P.post_img_url"
+            strSql += " FROM post as P"
+            strSql += " JOIN collection as C ON P.post_id = C.post_id"
+            strSql += " WHERE C.user_id = (%s)"
+            strSql += " ORDER BY C.time DESC"
+            result = cursor.execute(strSql, (user_id,))
+            datas = cursor.fetchall()
+
+            for data in datas:
+                raw_data = {
+                    'post_id': data[0],
+                    'post_img_url': data[1],
+                }
+                collection.append(raw_data)
+
         context = {
             'postListUser' : postListUser,
             'postCount' : postCount,
             'followingCount' : followingCount,
             'followerCount' : followerCount,
             'follow' : follow,
-            'posts': posts,
             'followingUsers' : followingUsers,
+            'posts': posts,
+            'collection' : collection,
             }
 
         return render(request, 'instagram/post_list.html', context)
-
 
     except:
         connection.rollback()

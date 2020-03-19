@@ -1,5 +1,4 @@
-<!-- post 저장하는 view 작성하고 바꾸기 -->
-{% for post in posts %}
+{% for post in collection %}
     <div class="postBox">
       <div class="postImg">
         <a href="{% url 'instagram:post_detail' post.post_id %}">

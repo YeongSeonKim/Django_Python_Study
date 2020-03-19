@@ -9,5 +9,5 @@ from .FollowView import *
 from .UnfollowView import *
 from .LikePostView import *
 from .UnlikePostView import *
-from .BookmarkView import *
-from .UnbookmarkView import *
+from .CollectionView import *
+from .UncollectionView import *

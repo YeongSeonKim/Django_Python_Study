@@ -25,6 +25,38 @@ def PostDetailView(request, post_id):
                 'post_img_url': data[0][2],
                 'content': data[0][3],
                 'time': data[0][4]}
+        
+        # 각각의 포스트 좋아요 개수
+        strSql = "SELECT COUNT(*)"
+        strSql += " FROM like_post"
+        strSql += " WHERE post_id = (%s)"
+
+        result = cursor.execute(strSql, (post['post_id'],))
+        data = cursor.fetchall()
+
+        post['likeCount'] = data[0][0]
+
+        # 로그인한 유저가 해당 포스트에 좋아요를 눌렀는지에 대한 여부
+        strSql = "SELECT COUNT(*)"
+        strSql += " FROM like_post"
+        strSql += " WHERE post_id = (%s)"
+        strSql += " AND user_id = (%s)"
+
+        result = cursor.execute(strSql, (post['post_id'], user.username)) 
+        data = cursor.fetchall()
+
+        post['like'] = data[0][0]
+
+        # 로그인한 유저가 해당 포스트를 컬렉션에 추가했는지에 대한 여부
+        strSql = " SELECT COUNT(*)" 
+        strSql += " FROM collection" 
+        strSql += " WHERE post_id = (%s)"
+        strSql += " AND user_id = (%s)"
+
+        result = cursor.execute(strSql, (post['post_id'], user.username))
+        data = cursor.fetchall() 
+
+        post['collection'] = data[0][0]
 
         postDetailUser = User.objects.get(username=post['user_id'])
 
