@@ -11,3 +11,4 @@ from .LikePostView import *
 from .UnlikePostView import *
 from .CollectionView import *
 from .UncollectionView import *
+from .SearchView import *

@@ -19,6 +19,7 @@ urlpatterns = [
     re_path(r'^unlike/(?P<post_id>[0-9]+)/$', UnlikePostView, name='unlike_post'),
     re_path(r'^collection/(?P<post_id>[0-9]+)/$', CollectionView, name='collection'),
     re_path(r'^uncollection/(?P<post_id>[0-9]+)/$', UncollectionView, name='uncollection'),
+    re_path(r'^p/search/$', SearchView, name='search')
 ]
 
 # MEDIA 파일 설정
