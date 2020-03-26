@@ -47,7 +47,11 @@
             <!-- content -->
             <p>{{ post.content }}</p>
             <!-- hashtag -->
-            <a href="#"><p class="hashtag">#테스트</p></a>
+            <p class="hashtag">
+              {% for tag in post.hashtags %}
+                <a href="#">{{ tag }}</a>
+              {% endfor %}
+            </p>
           </div>
         </div>
         <div class="info">

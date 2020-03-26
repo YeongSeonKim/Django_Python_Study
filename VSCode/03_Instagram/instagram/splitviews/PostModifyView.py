@@ -7,7 +7,10 @@ from .common import *
 : post_modify.html rendering
 2. request.method == POST
 : post_modify.html 의 form 데이터를 받아와 post 테이블에 사용자가 선택한 포스트를 UPDATE
-2.1 post_modify.html 의 form 데이터를 받아온다.
+    2.1 post_modify.html 의 form 데이터를 받아온다.
+    2.2 parameter로 받은 post_id를 조건하여 post 테이블에서 데이터 UPDATE
+    2.3 post_hashtag 테이블에서 기존에 포스트와 해시태그가 연결된 row들을 모두 DELETE
+    2.4 수정된 해시태그 데이터 INSERT(PostUploadView 와 같은 로직으로 처리)
 '''
 
 @login_required
@@ -32,6 +35,18 @@ def PostModifyView(request, post_id):
                 'time' : datas[0][4],
             }
 
+            # 해시태그
+            strSql = "SELECT H.keyword"
+            strSql += " FROM hashtag as H"
+            strSql += " JOIN post_hashtag as PH ON H.hashtag_id = PH.hashtag_id"
+            strSql += " WHERE PH.post_id = (%s)"
+
+            result = cursor.execute(strSql, (post_id,))
+            data = cursor.fetchall()
+            hashtags = " ".join([x for row in data for x in row])
+
+            post['hashtags'] = hashtags
+
             context = {
                 'post' : post,
             }
@@ -49,6 +64,8 @@ def PostModifyView(request, post_id):
 
     else:
         modifiedContent = request.POST.get('content')
+        modifiedhashtags = request.POST.get('hashtag')
+        modifiedhashtags = modifiedhashtags.split(" ")
         
         try:
             cursor = connection.cursor()
@@ -58,6 +75,36 @@ def PostModifyView(request, post_id):
             strSql += " WHERE post_id = (%s)"
             
             result = cursor.execute(strSql, (modifiedContent, post_id))
+
+            # post_hashtag 삭제
+            strSql = "DELETE FROM post_hashtag"
+            strSql += " WHERE post_id = (%s)"
+
+            result = cursor.execute(strSql, (post_id,))
+
+            for tag in modifiedhashtags:
+                if tag.startswith("#"):
+                    strSql = "SELECT hashtag_id"
+                    strSql += " FROM hashtag"
+                    strSql += " WHERE keyword = (%s)"
+
+                    result = cursor.execute(strSql, (tag,))
+                    data = cursor.fetchall()
+                    
+                    if result == 0:
+                        strSql = "INSERT INTO hashtag(keyword)"
+                        strSql += " VALUES(%s)"
+                        result = cursor.execute(strSql, (tag,))
+                        insertedHashtagId = cursor.lastrowid
+
+                        strSql = "INSERT INTO post_hashtag(post_id, hashtag_id)"
+                        strSql += " VALUES(%s, %s)"
+                        result = cursor.execute(strSql, (post_id, insertedHashtagId))
+
+                    else:
+                        strSql = "INSERT INTO post_hashtag(post_id, hashtag_id)"
+                        strSql += " VALUES(%s, %s)"
+                        result = cursor.execute(strSql, (post_id, data[0][0]))
 
             return redirect('instagram:post_detail', post_id)
         

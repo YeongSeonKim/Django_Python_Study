@@ -4,7 +4,9 @@ from .common import *
 [Instagram] 포스트 상세 페이지
 : 사용자가 작성한 포스트만을 볼 수 있는 페이지
 1. 클릭된 포스트를 SELECT
-2. 가져온 포스트를 post_detail.html에 rendering
+2. [200308] 클릭된 포스트 세부사항 데이터 SELECT
+3. [200326] 각 포스트별 해시태그 데이터 SELECT
+4. 가져온 포스트를 post_detail.html에 rendering
 '''
 
 def PostDetailView(request, post_id):
@@ -57,6 +59,18 @@ def PostDetailView(request, post_id):
         data = cursor.fetchall() 
 
         post['collection'] = data[0][0]
+
+        # 포스트 별 해시태그
+        strSql = "SELECT H.keyword"
+        strSql += " FROM post_hashtag as PH"
+        strSql += " JOIN hashtag as H ON PH.hashtag_id = H.hashtag_id"
+        strSql += " WHERE PH.post_id = (%s)"
+
+        result = cursor.execute(strSql, (post['post_id'],))
+        data = cursor.fetchall()
+        hashtags = [x for row in data for x in row]
+
+        post['hashtags'] = hashtags
 
         postDetailUser = User.objects.get(username=post['user_id'])
 

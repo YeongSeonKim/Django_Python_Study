@@ -175,7 +175,9 @@ function follow(elm, n) {
         $(elm).attr("class", "btn btn-outline-primary");
         $(elm).attr("onclick", "unfollow(this, '" + n + "')");
         $(elm).text("팔로잉");
-        $("#followerCount").text(response.followerCount);
+        if ($(elm).attr("id") == "follow_btn") {
+          $("#followerCount").text(response.followerCount);
+        }
     },
     error: function(xhr) {
         alert("팔로우를 하는 과정에서 에러가 발생했습니다.");
@@ -193,7 +195,9 @@ function unfollow(elm, n) {
         $(elm).attr("class", "btn btn-primary");
         $(elm).attr("onclick", "follow(this, '" + n + "')");
         $(elm).text("팔로우");
-        $("#followerCount").text(response.followerCount);
+        if ($(elm).attr("id") == "unfollow_btn") {
+          $("#followerCount").text(response.followerCount);
+        }
     },
     error: function(xhr) {
         alert("언팔로우 하는 과정에서 에러가 발생했습니다.");
