@@ -20,5 +20,6 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^accounts/', include('accounts.urls')),
+    re_path(r'^accounts/', include('allauth.urls')),
     re_path(r'^', include('instagram.urls')),
 ]
