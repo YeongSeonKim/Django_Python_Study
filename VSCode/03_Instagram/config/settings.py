@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'instagram',
 ]
 
+# 디폴트 SITE의 id / 등록을 하지 않으면, 각 요청 시에 host명의 Site 인스턴스를 찾는다 .
 SITE_ID = 1
 
 MIDDLEWARE = [
@@ -171,5 +172,7 @@ LOGIN_URL = '/accounts/login/'
 # User 모델 확장하기
 AUTH_USER_MODEL = 'accounts.User'
 
-# 로그인 후 리다이렉트 경로
-LOGIN_REDIRECT_URL ='instagram:main'
+# django-allauth setting
+LOGIN_REDIRECT_URL ='instagram:main' # 로그인 후 리다이렉트 할 페이지
+ACCOUNT_LOGOUT_REDIRECT_URL = 'accounts:login'  # 로그아웃 후 리다이렉트 할 페이지
+ACCOUNT_LOGOUT_ON_GET = True # 로그아웃 버튼 클릭 시 자동 로그아웃
