@@ -8,7 +8,7 @@
     <a href="{% url 'instagram:main' %}" class="insta_logo"><i class="fab fa-instagram"></i></a><h2>Instagram</h2>
   </div>
   <div class="search">
-    <form action="#">
+    <form action="{% url 'instagram:search' %}" method="GET" enctype="multipart/form-data">
       <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="검색">
     </form>
   </div>
